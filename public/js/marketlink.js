@@ -1,20 +1,22 @@
 /**
- * MarketLink - Client-side ES6 AJAX & Interactive Modules
- * Compliant with 30 Vibe-Coded Design & UX Rules
+ * MarketLink - Modern ES6 Interactive Client Script
+ * Emerald Green #059669 & Sleek Toast Feedback Engine
  */
 
 document.addEventListener('DOMContentLoaded', function () {
-    // 1. AJAX Add to Basket Handlers
-    document.querySelectorAll('.btn-add-to-basket').forEach(button => {
+    // 1. AJAX Add to Basket with Sleek Emerald Toast & Loading State
+    document.querySelectorAll('.btn-add-to-basket, .btn-add-modern').forEach(button => {
         button.addEventListener('click', function (e) {
             e.preventDefault();
             const productId = this.dataset.productId;
             const quantityInput = document.querySelector(`#qty-${productId}`);
             const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
-            const originalText = this.innerHTML;
+            const originalHtml = this.innerHTML;
 
+            // Loading state
             this.disabled = true;
-            this.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Adding...';
+            this.style.opacity = '0.75';
+            this.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span class="ms-1">Adding...</span>';
 
             fetch('/basket/add', {
                 method: 'POST',
@@ -31,28 +33,36 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(res => res.json())
             .then(data => {
                 this.disabled = false;
-                this.innerHTML = originalText;
+                this.style.opacity = '1';
+                this.innerHTML = originalHtml;
 
                 if (data.success) {
-                    showMarketToast(data.message, 'success');
+                    showEmeraldToast(data.message, 'success');
                     const badge = document.querySelector('#basket-count-badge');
                     if (badge) {
                         badge.textContent = data.cartCount;
                         badge.classList.remove('d-none');
+                        // Quick bounce pulse
+                        badge.animate([
+                            { transform: 'scale(1)' },
+                            { transform: 'scale(1.3)' },
+                            { transform: 'scale(1)' }
+                        ], { duration: 300 });
                     }
                 } else {
-                    showMarketToast(data.message || 'Unable to add produce to basket.', 'error');
+                    showEmeraldToast(data.message || 'Unable to add produce to basket.', 'notice');
                 }
             })
             .catch(err => {
                 this.disabled = false;
-                this.innerHTML = originalText;
-                showMarketToast('Network error while updating basket.', 'error');
+                this.style.opacity = '1';
+                this.innerHTML = originalHtml;
+                showEmeraldToast('Stall inventory busy. Please retry.', 'notice');
             });
         });
     });
 
-    // 2. Favorite Farmer AJAX Toggle
+    // 2. Favorite Farmer Toggle
     document.querySelectorAll('.btn-toggle-favorite').forEach(button => {
         button.addEventListener('click', function (e) {
             e.preventDefault();
@@ -79,41 +89,63 @@ document.addEventListener('DOMContentLoaded', function () {
                         icon.classList.add('fa-regular');
                         this.classList.remove('text-danger');
                     }
-                    showMarketToast(data.message, 'success');
+                    showEmeraldToast(data.message, 'success');
                 }
             })
             .catch(() => {
-                showMarketToast('Could not update favorite status.', 'error');
+                showEmeraldToast('Could not update favorite status.', 'notice');
             });
         });
     });
 
-    // 3. AI FAQ Assistant Bot Logic
+    // 3. AI FAQ Assistant Bot
     initFaqBot();
 });
 
-// Toast notification helper without emojis
-function showMarketToast(message, type = 'info') {
+// Sleek Emerald Toast Notification System
+function showEmeraldToast(message, type = 'success') {
     let container = document.getElementById('market-toast-container');
     if (!container) {
         container = document.createElement('div');
         container.id = 'market-toast-container';
-        container.style.cssText = 'position:fixed;bottom:20px;left:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;';
         document.body.appendChild(container);
     }
 
     const toast = document.createElement('div');
-    const bg = type === 'success' ? '#1b4332' : (type === 'error' ? '#842029' : '#2d6a4f');
-    toast.style.cssText = `background:${bg};color:#FAF9F6;padding:12px 18px;border-radius:6px;box-shadow:0 10px 25px rgba(0,0,0,0.15);font-size:14px;display:flex;align-items:center;gap:10px;animation:fadeIn 0.2s ease;`;
+    toast.className = 'market-toast-item';
 
-    const iconClass = type === 'success' ? 'fa-check' : (type === 'error' ? 'fa-circle-exclamation' : 'fa-info-circle');
-    toast.innerHTML = `<i class="fa-solid ${iconClass}"></i> <span>${message}</span>`;
+    const isSuccess = type === 'success';
+    const iconClass = isSuccess ? 'fa-check' : 'fa-info';
+    const iconBg = isSuccess ? '#ecfdf5' : '#fef3c7';
+    const iconColor = isSuccess ? '#059669' : '#d97706';
+    const borderLeftColor = isSuccess ? '#059669' : '#f59e0b';
+
+    toast.style.borderLeftColor = borderLeftColor;
+
+    toast.innerHTML = `
+        <div class="market-toast-icon" style="background-color: ${iconBg}; color: ${iconColor};">
+            <i class="fa-solid ${iconClass}"></i>
+        </div>
+        <div class="flex-grow-1" style="line-height: 1.4;">
+            <div style="font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; color: ${iconColor}; margin-bottom: 2px;">
+                ${isSuccess ? 'Market Basket Updated' : 'Notice'}
+            </div>
+            <div style="font-size: 0.9rem; color: #1E293B;">${message}</div>
+        </div>
+        <button type="button" class="btn-close btn-close-sm" style="font-size: 0.75rem;" onclick="this.parentElement.remove()"></button>
+    `;
 
     container.appendChild(toast);
+
+    // Trigger smooth slide in
+    requestAnimationFrame(() => {
+        toast.classList.add('show');
+    });
+
+    // Auto dismiss after 3.8s
     setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.3s ease';
-        setTimeout(() => toast.remove(), 300);
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 350);
     }, 3800);
 }
 
@@ -154,7 +186,7 @@ function initFaqBot() {
         // Skeleton loading indicator
         const loadingMsg = document.createElement('div');
         loadingMsg.className = 'bot-msg bot';
-        loadingMsg.innerHTML = '<i class="fa-solid fa-ellipsis fa-fade"></i> Consulting harvest registry...';
+        loadingMsg.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-emerald-600"></i> Searching harvest registry...';
         messages.appendChild(loadingMsg);
         messages.scrollTop = messages.scrollHeight;
 
@@ -179,7 +211,7 @@ function initFaqBot() {
             loadingMsg.remove();
             const botMsg = document.createElement('div');
             botMsg.className = 'bot-msg bot';
-            botMsg.textContent = 'Market desk offline. Please verify network connectivity.';
+            botMsg.textContent = 'Market coordinator offline. Please verify network connectivity.';
             messages.appendChild(botMsg);
         });
     }

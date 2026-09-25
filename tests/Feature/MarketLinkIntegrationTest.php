@@ -78,6 +78,7 @@ class MarketLinkIntegrationTest extends TestCase
         // Test QR token POS verification
         $order = Order::where('farmer_profile_id', $farmerUser->farmerProfile->id)->first();
         if ($order) {
+            $order->update(['status' => 'ready']);
             $verifyRes = $this->post('/vendor/verify-qr', [
                 'pickup_token' => $order->pickup_token
             ]);

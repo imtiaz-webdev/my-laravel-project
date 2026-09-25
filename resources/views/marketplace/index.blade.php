@@ -1,181 +1,218 @@
 @extends('layouts.app')
 
-@section('title', 'Local Organic Harvest Pre-Orders & Zero-Waste Baskets')
+@section('title', 'MarketLink | Local Organic Harvest Pre-Orders & Zero-Waste Baskets')
 
 @section('content')
-<div class="container py-4">
+<div class="container mx-auto px-4 py-6">
 
-    <!-- Asymmetrical Hero Section (2:4 Split Architecture - Rule 6 Compliant) -->
-    <div class="row g-4 align-items-center mb-5">
-        <div class="col-lg-7">
-            <div class="d-inline-flex align-items-center gap-2 mb-3 px-3 py-1 bg-white border rounded-pill" style="border-color: #d8f3dc !important;">
-                <span class="badge-co2">eGreen Basket Initiative</span>
-                <span class="small text-muted">Direct Regional Agricultural Sovereignty</span>
-            </div>
+    <!-- Redesigned Hero Section (Clean Text Density, Subtle Gradient & Organic Blur, High-Contrast CTAs) -->
+    <div class="relative bg-gradient-to-br from-emerald-50 via-white to-amber-50/40 border border-emerald-100/80 rounded-3xl p-6 sm:p-10 lg:p-14 mb-10 overflow-hidden shadow-[0_10px_30px_-10px_rgba(5,150,105,0.06)]">
+        <!-- Organic Background Blur Accent -->
+        <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-emerald-400/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-amber-400/10 blur-3xl pointer-events-none"></div>
 
-            <h1 class="display-5 fw-bold mb-3" style="color: #081c15; line-height: 1.15;">
-                Reserve Farm Harvests Before Cutoff. Prevent Agricultural Waste.
-            </h1>
-
-            <p class="lead text-muted mb-4" style="font-size: 1.1rem; max-width: 580px;">
-                Connect directly with certified smallholder growers. Pre-order freshly pulled morning crops, unlock automated zero-waste batch discounts, and collect in person with encrypted QR tokens.
-            </p>
-
-            <div class="d-flex flex-wrap gap-3 mb-4">
-                <a href="{{ route('market.explorer') }}" class="btn btn-forest px-4 py-2">
-                    <i class="fa-solid fa-map-pin me-2"></i> Explore Live Market Map
-                </a>
-                <a href="#zero-waste" class="btn btn-ochre px-4 py-2">
-                    <i class="fa-solid fa-tags me-2"></i> Zero-Waste Flash Bundles
-                </a>
-            </div>
-
-            <!-- Impact Metrics Strip -->
-            <div class="row g-3 pt-3 border-top" style="border-color: #e3ded6 !important;">
-                <div class="col-sm-4 col-6">
-                    <div class="font-heading fw-bold fs-4 text-success">{{ number_format($totalCo2Saved, 1) }} kg</div>
-                    <div class="small text-muted">Transport CO2 Prevented</div>
-                </div>
-                <div class="col-sm-4 col-6">
-                    <div class="font-heading fw-bold fs-4 text-dark">{{ $totalFarmersCount }} Certified</div>
-                    <div class="small text-muted">Smallholder Producers</div>
-                </div>
-                <div class="col-sm-4 col-12">
-                    <div class="font-heading fw-bold fs-4" style="color: #d4a373;">100% Cash</div>
-                    <div class="small text-muted">Direct Farmer Settlement</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-5">
-            <!-- Featured Market Focus Panel -->
-            <div class="ml-card p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="badge-harvest-time">
-                        <i class="fa-solid fa-clock"></i> Active Market Day
-                    </span>
-                    <span class="badge-co2">
-                        <i class="fa-solid fa-circle-check"></i> CCOF Verified
-                    </span>
+        <div class="row align-items-center g-5 relative z-10">
+            <div class="col-lg-7">
+                <!-- Simplified Badges -->
+                <div class="d-inline-flex align-items-center gap-2 mb-3.5 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full border border-emerald-200 shadow-xs">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-xs font-bold text-emerald-800 tracking-wide uppercase">eGreen Basket</span>
+                    <span class="text-slate-300">&bull;</span>
+                    <span class="text-xs font-semibold text-slate-600">Verified Local Growers</span>
                 </div>
 
-                <h4 class="mb-1">Downtown Civic Plaza Market</h4>
-                <p class="text-muted small mb-3">100 Civic Center Plaza, San Francisco, CA</p>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-3 font-heading">
+                    Direct Farm Harvests.<br class="d-none d-sm-inline">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-teal-600">Zero Waste.</span> Direct Cash Pickup.
+                </h1>
 
-                <div class="p-3 mb-3 rounded" style="background-color: #f3efe9; border: 1px solid #e2ddd4;">
-                    <div class="d-flex justify-content-between small text-muted mb-1">
-                        <span>Operating Schedule:</span>
-                        <strong class="text-dark">Wednesday & Saturday</strong>
+                <p class="text-base sm:text-lg text-slate-600 mb-6 max-w-xl font-normal leading-relaxed">
+                    Reserve peak morning crops directly from certified regional smallholders. Unlock automated zero-waste discounts before market cutoffs and pick up with instant QR passes.
+                </p>
+
+                <!-- High-Contrast Modern CTA Buttons -->
+                <div class="d-flex flex-wrap items-center gap-3 mb-6">
+                    <a href="{{ route('market.explorer') }}" class="btn-cta-emerald text-decoration-none">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span>Explore Market</span>
+                    </a>
+                    <a href="#zero-waste" class="btn-cta-amber text-decoration-none">
+                        <i class="fa-solid fa-bolt text-amber-500"></i>
+                        <span>Flash Deals</span>
+                    </a>
+                </div>
+
+                <!-- Simplified Real Impact Metrics -->
+                <div class="d-flex flex-wrap items-center gap-4 sm:gap-6 pt-4 border-t border-slate-200/80 text-xs sm:text-sm">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-leaf text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-slate-900 d-block">{{ number_format($totalCo2Saved, 1) }} kg CO2</span>
+                            <span class="text-slate-500 text-xs">Emissions Avoided</span>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between small text-muted mb-1">
-                        <span>Pre-Order Window:</span>
-                        <strong class="text-dark">07:30 AM - 01:30 PM</strong>
+
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-certificate text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-slate-900 d-block">{{ $totalFarmersCount }} Certified</span>
+                            <span class="text-slate-500 text-xs">Farm Producers</span>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between small text-muted">
-                        <span>Stall-by-Stall Routing:</span>
-                        <strong class="text-success">Supported via Leaflet</strong>
+
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-handshake text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-slate-900 d-block">100% Cash Settle</span>
+                            <span class="text-slate-500 text-xs">Zero Middleman Fees</span>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="d-flex gap-2">
-                    <a href="{{ route('market.explorer', ['market_id' => 1]) }}" class="btn btn-outline-forest w-100 py-2">
-                        View 3 Stalls in Venue
+            <div class="col-lg-5">
+                <!-- Sleek Market Spotlight Card -->
+                <div class="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-lg shadow-slate-200/50">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge-organic">
+                            <i class="fa-solid fa-location-dot"></i> Central Hub
+                        </span>
+                        <span class="badge-harvest-pill">
+                            <i class="fa-solid fa-calendar-check text-emerald-600"></i> Wednesday & Saturday
+                        </span>
+                    </div>
+
+                    <h4 class="font-bold text-xl text-slate-900 mb-1">Downtown Civic Plaza Market</h4>
+                    <p class="text-xs text-slate-500 mb-4">100 Civic Center Plaza, San Francisco, CA</p>
+
+                    <div class="bg-slate-50 rounded-2xl p-3.5 mb-4 border border-slate-100 space-y-2 text-xs">
+                        <div class="d-flex justify-content-between text-slate-600">
+                            <span>Pre-Order Packing:</span>
+                            <strong class="text-slate-800">07:30 AM - 01:30 PM</strong>
+                        </div>
+                        <div class="d-flex justify-content-between text-slate-600">
+                            <span>Pedestrian Route Plan:</span>
+                            <strong class="text-emerald-700">Multi-Stall Trajectory Active</strong>
+                        </div>
+                    </div>
+
+                    <a href="{{ route('market.explorer', ['market_id' => 1]) }}" class="d-block text-center w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition text-decoration-none">
+                        View Interactive Stall Map
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Category Filter Bar -->
-    <div class="mb-5">
-        <div class="d-flex justify-content-between align-items-end mb-3">
+    <!-- Category Pills Strip -->
+    <div class="mb-10">
+        <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h3 class="mb-1">Harvest Categories</h3>
-                <p class="text-muted small mb-0">Filtered by seasonal availability and agroecological discipline</p>
+                <h3 class="font-bold text-2xl text-slate-900 mb-0 font-heading">Harvest Categories</h3>
+                <span class="text-xs text-slate-500">Curated organic crop classifications</span>
             </div>
-            <a href="{{ route('market.explorer') }}" class="btn btn-sm btn-outline-forest">All Categories</a>
+            <a href="{{ route('market.explorer') }}" class="text-xs font-bold text-emerald-700 hover:text-emerald-800 text-decoration-none">
+                View All Categories <i class="fa-solid fa-arrow-right ms-1"></i>
+            </a>
         </div>
 
-        <div class="row g-2">
+        <div class="row g-3">
             @foreach($categories as $cat)
                 <div class="col-lg-2 col-md-4 col-6">
-                    <a href="{{ route('market.explorer', ['category' => $cat->slug]) }}" class="ml-card p-3 text-center d-block ml-card-hover h-100">
-                        <div class="mb-2">
-                            <i class="fa-solid {{ $cat->icon ?? 'fa-leaf' }} fa-xl text-success"></i>
+                    <a href="{{ route('market.explorer', ['category' => $cat->slug]) }}" class="category-card-modern group">
+                        <div class="w-12 h-12 mx-auto rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2.5 group-hover:bg-emerald-600 group-hover:text-white transition duration-200">
+                            <i class="fa-solid {{ $cat->icon ?? 'fa-leaf' }} text-lg"></i>
                         </div>
-                        <div class="fw-semibold small text-dark mb-1">{{ $cat->name }}</div>
-                        <span class="badge bg-light text-muted border small">{{ $cat->products_count }} Available</span>
+                        <div class="font-bold text-sm text-slate-800 mb-1 group-hover:text-emerald-700 transition">{{ $cat->name }}</div>
+                        <span class="text-[11px] font-semibold text-slate-400">{{ $cat->products_count }} Available</span>
                     </a>
                 </div>
             @endforeach
         </div>
     </div>
 
-    <!-- Winning Feature 2: Zero-Waste Batch Pricing Section (Auto-Discount Engine) -->
-    <div class="mb-5" id="zero-waste">
-        <div class="p-4 rounded-3 border" style="background-color: #faf6f0; border-color: #edd9be !important;">
-            <div class="row align-items-center mb-4">
-                <div class="col-md-8">
-                    <div class="d-inline-flex align-items-center gap-2 mb-2">
-                        <span class="badge-zero-waste">
-                            <i class="fa-solid fa-tag"></i> Smart Auto-Discount Engine
+    <!-- Zero-Waste Batch Pricing Section (Product Cards Upgrade: rounded-3xl, hover:shadow-xl, clean prices) -->
+    <div class="mb-12" id="zero-waste">
+        <div class="bg-gradient-to-r from-amber-50/80 via-white to-amber-50/50 border border-amber-200/70 rounded-3xl p-6 sm:p-8">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-6">
+                <div>
+                    <div class="d-inline-flex align-items-center gap-2 mb-1.5">
+                        <span class="badge-flash-cut">
+                            <i class="fa-solid fa-bolt"></i> Auto-Discount Engine
                         </span>
-                        <span class="small text-muted">Closing Window Batch Releases</span>
+                        <span class="text-xs text-amber-800 font-semibold">Closing Window Surplus Baskets</span>
                     </div>
-                    <h3 class="mb-1" style="color: #6a3e14;">Zero-Waste Harvest Bundles</h3>
-                    <p class="text-muted small mb-0">
-                        Surplus morning harvests automatically marked down by up to 40% to ensure zero farm-gate discards. Reserve for rapid Saturday morning collection.
-                    </p>
+                    <h3 class="text-2xl font-extrabold text-slate-900 mb-0 font-heading">Zero-Waste Harvest Bundles</h3>
+                    <p class="text-xs text-slate-500 mb-0">Unsold morning harvest crates automatically marked down to prevent food waste.</p>
                 </div>
-                <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                    <span class="badge bg-dark text-white px-3 py-2 small">
-                        <i class="fa-solid fa-hourglass-half me-1 text-warning"></i> Auto-Price Adjusts Live
+                <div>
+                    <span class="text-xs font-bold text-amber-800 bg-amber-100/80 px-3 py-1.5 rounded-full border border-amber-200">
+                        <i class="fa-solid fa-clock me-1"></i> Saturday Pickup Reserve
                     </span>
                 </div>
             </div>
 
-            <!-- Dynamic Product Grid -->
-            <div class="row g-3">
+            <!-- Upgraded Modern Product Cards Grid -->
+            <div class="row g-4">
                 @forelse($zeroWasteProducts as $item)
                     <div class="col-lg-4 col-md-6">
-                        <div class="ml-card ml-card-hover h-100 d-flex flex-column">
-                            <div class="product-media">
-                                <img src="{{ $item->image_url ?? 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80' }}" alt="{{ $item->name }}">
-                                <div class="product-badges">
-                                    <span class="badge-zero-waste">
-                                        {{ $item->discount_percent }}% Zero-Waste Cut
+                        <div class="product-card-modern group h-100">
+                            <!-- Image Container with Hover Scale & Styled Badges -->
+                            <div class="product-image-container">
+                                <img src="{{ $item->image_url ?? 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80' }}" alt="{{ $item->name }}" loading="lazy">
+                                <div class="absolute top-3 left-3 d-flex flex-column gap-1.5 z-10">
+                                    <span class="badge-flash-cut">
+                                        {{ $item->discount_percent }}% Off Bundle
                                     </span>
-                                    <span class="badge-harvest-time">
-                                        {{ $item->harvest_status_string }}
+                                    <!-- Formatted Dynamic Label (No Raw Decimals!) -->
+                                    <span class="badge-harvest-pill">
+                                        <i class="fa-solid fa-clock text-amber-600"></i> {{ $item->harvest_label }}
+                                    </span>
+                                </div>
+                                <div class="absolute top-3 right-3 z-10">
+                                    <span class="badge-organic">
+                                        <i class="fa-solid fa-leaf text-xs"></i> Organic
                                     </span>
                                 </div>
                             </div>
-                            <div class="ml-card-body d-flex flex-column flex-grow-1">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <span class="small text-muted">{{ $item->farmerProfile->stall_name }}</span>
-                                    <span class="badge-co2">
-                                        <i class="fa-solid fa-tree"></i> -{{ $item->co2_savings_kg }} kg CO2
+
+                            <!-- Card Body -->
+                            <div class="p-4 d-flex flex-column flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="text-xs font-semibold text-slate-500 truncate max-w-[180px]">{{ $item->farmerProfile->stall_name }}</span>
+                                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">
+                                        -{{ number_format($item->co2_savings_kg, 1) }} kg CO2
                                     </span>
                                 </div>
 
-                                <h5 class="card-title mb-2">
-                                    <a href="{{ route('product.show', $item->slug) }}" class="text-dark">{{ $item->name }}</a>
+                                <h5 class="font-bold text-base text-slate-900 mb-1 group-hover:text-emerald-700 transition">
+                                    <a href="{{ route('product.show', $item->slug) }}" class="text-decoration-none text-slate-900 group-hover:text-emerald-700">
+                                        {{ $item->name }}
+                                    </a>
                                 </h5>
 
-                                <p class="text-muted small mb-3 flex-grow-1">
-                                    {{ Str::limit($item->description, 85) }}
+                                <p class="text-xs text-slate-500 mb-4 flex-grow-1 line-clamp-2 leading-relaxed">
+                                    {{ Str::limit($item->description, 80) }}
                                 </p>
 
-                                <div class="d-flex justify-content-between align-items-center pt-2 border-top" style="border-color: #eee !important;">
+                                <!-- Clean Price Tag & Interactive Add Button -->
+                                <div class="d-flex justify-content-between align-items-center pt-3 border-t border-slate-100 mt-auto">
                                     <div>
-                                        <span class="price-original">${{ number_format($item->price, 2) }}</span>
-                                        <span class="price-tag price-discounted">${{ number_format($item->effective_price, 2) }}</span>
-                                        <span class="small text-muted">/ {{ $item->unit }}</span>
+                                        <span class="price-strikethrough">${{ number_format($item->price, 2) }}</span>
+                                        <span class="price-display price-flash">${{ number_format($item->effective_price, 2) }}</span>
+                                        <span class="text-xs text-slate-400">/ {{ $item->unit }}</span>
                                     </div>
-                                    <div class="d-flex gap-2">
-                                        <input type="number" id="qty-{{ $item->id }}" value="1" min="1" max="{{ $item->stock_quantity }}" class="form-control form-control-sm text-center" style="width: 55px;">
-                                        <button class="btn btn-sm btn-forest btn-add-to-basket" data-product-id="{{ $item->id }}" title="Add to basket">
-                                            <i class="fa-solid fa-plus"></i>
+                                    <div class="d-flex align-items-center gap-1.5">
+                                        <input type="number" id="qty-{{ $item->id }}" value="1" min="1" max="{{ $item->stock_quantity }}" class="form-control form-control-sm text-center font-bold text-xs rounded-xl" style="width: 48px; height: 34px;">
+                                        <button class="btn-add-modern btn-add-to-basket" data-product-id="{{ $item->id }}" title="Add to basket">
+                                            <i class="fa-solid fa-plus text-xs"></i>
+                                            <span>Add</span>
                                         </button>
                                     </div>
                                 </div>
@@ -183,71 +220,84 @@
                         </div>
                     </div>
                 @empty
-                    <div class="col-12 text-center py-4">
-                        <p class="text-muted">All zero-waste batches for current market session reserved.</p>
+                    <div class="col-12 text-center py-8 text-slate-500 text-sm">
+                        All zero-waste flash bundles for current market session reserved.
                     </div>
                 @endforelse
             </div>
         </div>
     </div>
 
-    <!-- Fresh Harvest Products Section with Dynamic Harvest Countdown -->
-    <div class="mb-5">
-        <div class="d-flex justify-content-between align-items-end mb-3">
+    <!-- Peak Morning Harvests (Clean Modern Cards with rounded-3xl & formatted dynamic labels) -->
+    <div class="mb-12">
+        <div class="d-flex justify-content-between align-items-center mb-6">
             <div>
-                <h3 class="mb-1">Peak Morning Harvests</h3>
-                <p class="text-muted small mb-0">Harvested within hours of pickup windows for maximum nutritional bioavailability</p>
+                <h3 class="text-2xl font-extrabold text-slate-900 mb-0 font-heading">Peak Morning Harvests</h3>
+                <span class="text-xs text-slate-500">Picked at dawn from certified regional soil</span>
             </div>
-            <a href="{{ route('market.explorer') }}" class="btn btn-sm btn-outline-forest">All Harvest Listings</a>
+            <a href="{{ route('market.explorer') }}" class="text-xs font-bold text-emerald-700 hover:text-emerald-800 text-decoration-none">
+                All Harvest Listings <i class="fa-solid fa-arrow-right ms-1"></i>
+            </a>
         </div>
 
         <div class="row g-4">
             @foreach($freshProducts as $product)
                 <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="ml-card ml-card-hover h-100 d-flex flex-column">
-                        <div class="product-media">
-                            <img src="{{ $product->image_url ?? 'https://images.unsplash.com/photo-1598170845058-32b9d6a5c317?auto=format&fit=crop&w=600&q=80' }}" alt="{{ $product->name }}">
-                            <div class="product-badges">
+                    <div class="product-card-modern group h-100">
+                        <div class="product-image-container">
+                            <img src="{{ $product->image_url ?? 'https://images.unsplash.com/photo-1598170845058-32b9d6a5c317?auto=format&fit=crop&w=600&q=80' }}" alt="{{ $product->name }}" loading="lazy">
+                            <div class="absolute top-3 left-3 d-flex flex-column gap-1.5 z-10">
                                 @if($product->badge_label)
-                                    <span class="badge bg-dark text-white small" style="border-radius: 4px;">{{ $product->badge_label }}</span>
+                                    <span class="badge-organic bg-slate-900 text-white border-0">
+                                        {{ $product->badge_label }}
+                                    </span>
+                                @else
+                                    <span class="badge-organic">
+                                        <i class="fa-solid fa-check text-xs"></i> Verified
+                                    </span>
                                 @endif
-                                <span class="badge-harvest-time">
-                                    <i class="fa-solid fa-scissors"></i> {{ $product->harvest_status_string }}
+                                <!-- Formatted Dynamic Label (No Raw Decimals!) -->
+                                <span class="badge-harvest-pill">
+                                    <i class="fa-solid fa-scissors text-emerald-600"></i> {{ $product->harvest_label }}
                                 </span>
                             </div>
                         </div>
 
-                        <div class="ml-card-body d-flex flex-column flex-grow-1">
+                        <div class="p-4 d-flex flex-column flex-grow-1">
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <a href="{{ route('farmer.show', $product->farmerProfile->slug) }}" class="small text-muted">
+                                <a href="{{ route('farmer.show', $product->farmerProfile->slug) }}" class="text-xs font-semibold text-slate-500 hover:text-emerald-700 text-decoration-none truncate max-w-[160px]">
                                     {{ $product->farmerProfile->stall_name }}
                                 </a>
-                                <span class="small text-muted">{{ $product->farmerProfile->stall_number }}</span>
+                                <span class="text-[11px] font-bold text-slate-400">{{ $product->farmerProfile->stall_number }}</span>
                             </div>
 
-                            <h6 class="fw-bold mb-1">
-                                <a href="{{ route('product.show', $product->slug) }}" class="text-dark">{{ $product->name }}</a>
-                            </h6>
+                            <h5 class="font-bold text-base text-slate-900 mb-1 group-hover:text-emerald-700 transition">
+                                <a href="{{ route('product.show', $product->slug) }}" class="text-decoration-none text-slate-900 group-hover:text-emerald-700">
+                                    {{ $product->name }}
+                                </a>
+                            </h5>
 
-                            <div class="small text-muted mb-3 flex-grow-1">
-                                {{ Str::limit($product->harvest_notes ?? $product->description, 70) }}
-                            </div>
+                            <p class="text-xs text-slate-500 mb-3 flex-grow-1 line-clamp-2 leading-relaxed">
+                                {{ Str::limit($product->harvest_notes ?? $product->description, 75) }}
+                            </p>
 
-                            <div class="mb-2">
-                                <span class="badge-co2">
-                                    <i class="fa-solid fa-leaf"></i> {{ $product->co2_savings_kg }} kg CO2 Offset
+                            <div class="mb-3">
+                                <span class="badge-co2-pill">
+                                    <i class="fa-solid fa-tree text-emerald-600 text-xs"></i> {{ number_format($product->co2_savings_kg, 1) }} kg CO2 Offset
                                 </span>
                             </div>
 
-                            <div class="d-flex justify-content-between align-items-center pt-2 border-top" style="border-color: #eee !important;">
+                            <!-- Clean Price & Button -->
+                            <div class="d-flex justify-content-between align-items-center pt-3 border-t border-slate-100 mt-auto">
                                 <div>
-                                    <span class="price-tag">${{ number_format($product->price, 2) }}</span>
-                                    <span class="small text-muted">/ {{ $product->unit }}</span>
+                                    <span class="price-display">${{ number_format($product->price, 2) }}</span>
+                                    <span class="text-xs text-slate-400">/ {{ $product->unit }}</span>
                                 </div>
-                                <div class="d-flex gap-2">
-                                    <input type="number" id="qty-{{ $product->id }}" value="1" min="1" max="{{ $product->stock_quantity }}" class="form-control form-control-sm text-center" style="width: 50px;">
-                                    <button class="btn btn-sm btn-forest btn-add-to-basket" data-product-id="{{ $product->id }}">
-                                        Add
+                                <div class="d-flex align-items-center gap-1.5">
+                                    <input type="number" id="qty-{{ $product->id }}" value="1" min="1" max="{{ $product->stock_quantity }}" class="form-control form-control-sm text-center font-bold text-xs rounded-xl" style="width: 48px; height: 34px;">
+                                    <button class="btn-add-modern btn-add-to-basket" data-product-id="{{ $product->id }}" title="Add to basket">
+                                        <i class="fa-solid fa-plus text-xs"></i>
+                                        <span>Add</span>
                                     </button>
                                 </div>
                             </div>
@@ -258,51 +308,51 @@
         </div>
     </div>
 
-    <!-- Verified Buyer Feedback Strip (Rule 12 Compliant: Real Verified Badging) -->
-    <div class="mb-5 p-4 rounded-3" style="background-color: #f7f5f0; border: 1px solid #e5e0d8;">
-        <div class="d-flex justify-content-between align-items-center mb-4">
+    <!-- Verified Buyer Feedback Strip (Modern Card Layout) -->
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm mb-8">
+        <div class="d-flex justify-content-between align-items-center mb-6">
             <div>
-                <h4 class="mb-1">Verified Stall Transaction Reviews</h4>
-                <p class="text-muted small mb-0">Authenticated customer feedback tied directly to settled pickup tokens</p>
+                <h4 class="font-bold text-xl text-slate-900 mb-0 font-heading">Verified Stall Reviews</h4>
+                <span class="text-xs text-slate-500">Authenticated feedback tethered directly to settled pickup tokens</span>
             </div>
-            <span class="badge-verified-buyer">
-                <i class="fa-solid fa-shield-check"></i> 100% Cryptographically Verified
+            <span class="badge-organic">
+                <i class="fa-solid fa-shield-check text-emerald-600"></i> Cryptographically Verified
             </span>
         </div>
 
         <div class="row g-4">
             @foreach($recentReviews as $rev)
                 <div class="col-lg-4 col-md-6">
-                    <div class="ml-card p-3 h-100 bg-white">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge-verified-buyer">
-                                <i class="fa-solid fa-circle-check"></i> Verified Buyer
+                    <div class="p-4 rounded-2xl bg-slate-50/70 border border-slate-200/70 h-100 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-2.5">
+                            <span class="badge-organic text-[11px]">
+                                <i class="fa-solid fa-check text-emerald-600"></i> Verified Buyer
                             </span>
-                            <div class="text-warning small">
+                            <div class="text-amber-400 text-xs">
                                 @for($i = 1; $i <= 5; $i++)
-                                    <i class="fa-solid fa-star {{ $i <= $rev->rating ? '' : 'text-muted opacity-25' }}"></i>
+                                    <i class="fa-solid fa-star {{ $i <= $rev->rating ? '' : 'text-slate-200' }}"></i>
                                 @endfor
                             </div>
                         </div>
 
-                        <p class="small text-dark mb-3">
+                        <p class="text-xs text-slate-700 leading-relaxed mb-4 flex-grow-1">
                             "{{ $rev->comment }}"
                         </p>
 
-                        <div class="d-flex justify-content-between align-items-end small pt-2 border-top">
+                        <div class="pt-3 border-t border-slate-200/60 d-flex justify-content-between align-items-end text-xs">
                             <div>
-                                <strong class="text-dark">{{ $rev->customer->name }}</strong>
-                                <div class="text-muted" style="font-size: 0.75rem;">Stall: {{ $rev->farmerProfile->stall_name }}</div>
+                                <strong class="text-slate-900 d-block">{{ $rev->customer->name }}</strong>
+                                <span class="text-slate-500 text-[11px]">{{ $rev->farmerProfile->stall_name }}</span>
                             </div>
-                            <span class="text-muted" style="font-size: 0.72rem;">{{ $rev->created_at->diffForHumans() }}</span>
+                            <span class="text-slate-400 text-[11px]">{{ $rev->created_at->diffForHumans() }}</span>
                         </div>
 
                         @if($rev->farmer_reply)
-                            <div class="mt-2 p-2 rounded bg-light border small">
-                                <div class="fw-semibold text-success mb-1" style="font-size: 0.75rem;">
+                            <div class="mt-3 p-2.5 rounded-xl bg-white border border-slate-200/60 text-xs">
+                                <div class="font-bold text-emerald-700 text-[11px] mb-1">
                                     <i class="fa-solid fa-reply me-1"></i> Farmer Response:
                                 </div>
-                                <div class="text-muted" style="font-size: 0.78rem;">{{ $rev->farmer_reply }}</div>
+                                <div class="text-slate-600 text-[11px]">{{ $rev->farmer_reply }}</div>
                             </div>
                         @endif
                     </div>

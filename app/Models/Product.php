@@ -84,18 +84,25 @@ class Product extends Model
 
         $now = Carbon::now();
         if ($this->harvest_date->isFuture()) {
-            return "Scheduled harvest in " . $this->harvest_date->diffForHumans(null, true);
+            return "Scheduled in " . $this->harvest_date->diffForHumans(null, true);
         }
 
-        $diffHours = $this->harvest_date->diffInHours($now);
+        $diffHours = (int) round($this->harvest_date->diffInHours($now));
         if ($diffHours < 1) {
-            return "Harvested just moments ago";
+            return "Harvested just now";
+        } elseif ($diffHours === 1) {
+            return "Harvested 1 hour ago";
         } elseif ($diffHours < 24) {
             return "Harvested {$diffHours} hours ago";
         } else {
-            $days = $this->harvest_date->diffInDays($now);
-            return "Harvested {$days} days ago";
+            $days = (int) round($this->harvest_date->diffInDays($now));
+            return $days <= 1 ? "Harvested 1 day ago" : "Harvested {$days} days ago";
         }
+    }
+
+    public function getHarvestLabelAttribute(): string
+    {
+        return $this->getHarvestStatusStringAttribute();
     }
 
     public function scopeAvailable(Builder $query): Builder
