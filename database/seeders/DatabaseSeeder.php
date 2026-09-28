@@ -23,17 +23,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $adminEmail = config('admin.email');
+        $adminPassword = config('admin.password');
+
+        if (blank($adminEmail) || blank($adminPassword)) {
+            throw new \RuntimeException('Set ADMIN_EMAIL and ADMIN_PASSWORD in .env before seeding the database.');
+        }
+
         $password = Hash::make('password');
 
         // 1. Create Admin
         $admin = User::create([
             'name' => 'Eleanor Vance',
-            'email' => 'admin@marketlink.org',
+            'email' => $adminEmail,
             'phone' => '+1 (555) 234-8890',
             'address' => 'Civic Center Executive Pavilion, Suite 400',
             'role' => 'admin',
             'status' => 'active',
-            'password' => $password,
+            'password' => Hash::make($adminPassword),
         ]);
 
         // 2. Create Farmers / Vendors

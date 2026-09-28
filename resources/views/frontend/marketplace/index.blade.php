@@ -5,110 +5,45 @@
 @section('content')
 <div class="container mx-auto px-4 py-6">
 
-    <!-- Redesigned Hero Section (Clean Text Density, Subtle Gradient & Organic Blur, High-Contrast CTAs) -->
-    <div class="relative bg-gradient-to-br from-emerald-50 via-white to-amber-50/40 border border-emerald-100/80 rounded-3xl p-6 sm:p-10 lg:p-14 mb-10 overflow-hidden shadow-[0_10px_30px_-10px_rgba(5,150,105,0.06)]">
-        <!-- Organic Background Blur Accent -->
-        <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-emerald-400/10 blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-amber-400/10 blur-3xl pointer-events-none"></div>
-
-        <div class="row align-items-center g-5 relative z-10">
+    <section class="market-hero mb-5">
+        <div class="row align-items-center g-0">
             <div class="col-lg-7">
-                <!-- Simplified Badges -->
-                <div class="d-inline-flex align-items-center gap-2 mb-3.5 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full border border-emerald-200 shadow-xs">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span class="text-xs font-bold text-emerald-800 tracking-wide uppercase">eGreen Basket</span>
-                    <span class="text-slate-300">&bull;</span>
-                    <span class="text-xs font-semibold text-slate-600">Verified Local Growers</span>
-                </div>
+                <div class="market-hero-copy">
+                    <div class="market-kicker"><span></span> Local growers, one marketplace</div>
 
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-3 font-heading">
-                    Direct Farm Harvests.<br class="d-none d-sm-inline">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-teal-600">Zero Waste.</span> Direct Cash Pickup.
-                </h1>
+                    <h1 class="market-hero-title">
+                        Fresh from the farm.<br>
+                        <span>Ready for your table.</span>
+                    </h1>
 
-                <p class="text-base sm:text-lg text-slate-600 mb-6 max-w-xl font-normal leading-relaxed">
-                    Reserve peak morning crops directly from certified regional smallholders. Unlock automated zero-waste discounts before market cutoffs and pick up with instant QR passes.
-                </p>
+                    <p class="market-hero-description">
+                        Reserve the morning harvest from regional growers, find seasonal prices, and collect your order at a nearby market.
+                    </p>
 
-                <!-- High-Contrast Modern CTA Buttons -->
-                <div class="d-flex flex-wrap items-center gap-3 mb-6">
-                    <a href="{{ route('market.explorer') }}" class="btn-cta-emerald text-decoration-none">
-                        <i class="fa-solid fa-map-location-dot"></i>
-                        <span>Explore Market</span>
-                    </a>
-                    <a href="#zero-waste" class="btn-cta-amber text-decoration-none">
-                        <i class="fa-solid fa-bolt text-amber-500"></i>
-                        <span>Flash Deals</span>
-                    </a>
-                </div>
-
-                <!-- Simplified Real Impact Metrics -->
-                <div class="d-flex flex-wrap items-center gap-4 sm:gap-6 pt-4 border-t border-slate-200/80 text-xs sm:text-sm">
-                    <div class="d-flex align-items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
-                            <i class="fa-solid fa-leaf text-xs"></i>
-                        </div>
-                        <div>
-                            <span class="font-extrabold text-slate-900 d-block">{{ number_format($totalCo2Saved, 1) }} kg CO2</span>
-                            <span class="text-slate-500 text-xs">Emissions Avoided</span>
-                        </div>
+                    <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+                        <a href="{{ route('market.explorer') }}" class="btn-market-primary text-decoration-none">
+                            Explore the market
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"/></svg>
+                        </a>
+                        <a href="#zero-waste" class="btn-market-secondary text-decoration-none">Browse reduced-price harvest</a>
                     </div>
 
-                    <div class="d-flex align-items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
-                            <i class="fa-solid fa-certificate text-xs"></i>
-                        </div>
-                        <div>
-                            <span class="font-extrabold text-slate-900 d-block">{{ $totalFarmersCount }} Certified</span>
-                            <span class="text-slate-500 text-xs">Farm Producers</span>
-                        </div>
-                    </div>
-
-                    <div class="d-flex align-items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
-                            <i class="fa-solid fa-handshake text-xs"></i>
-                        </div>
-                        <div>
-                            <span class="font-extrabold text-slate-900 d-block">100% Cash Settle</span>
-                            <span class="text-slate-500 text-xs">Zero Middleman Fees</span>
-                        </div>
+                    <div class="market-hero-facts">
+                        <div><strong>{{ number_format($totalCo2Saved, 1) }} kg</strong><span>CO2 avoided</span></div>
+                        <div><strong>{{ $totalFarmersCount }}</strong><span>local producers</span></div>
+                        <div><strong>Direct</strong><span>market pickup</span></div>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-5">
-                <!-- Sleek Market Spotlight Card -->
-                <div class="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-lg shadow-slate-200/50">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="badge-organic">
-                            <i class="fa-solid fa-location-dot"></i> Central Hub
-                        </span>
-                        <span class="badge-harvest-pill">
-                            <i class="fa-solid fa-calendar-check text-emerald-600"></i> Wednesday & Saturday
-                        </span>
-                    </div>
-
-                    <h4 class="font-bold text-xl text-slate-900 mb-1">Downtown Civic Plaza Market</h4>
-                    <p class="text-xs text-slate-500 mb-4">100 Civic Center Plaza, San Francisco, CA</p>
-
-                    <div class="bg-slate-50 rounded-2xl p-3.5 mb-4 border border-slate-100 space-y-2 text-xs">
-                        <div class="d-flex justify-content-between text-slate-600">
-                            <span>Pre-Order Packing:</span>
-                            <strong class="text-slate-800">07:30 AM - 01:30 PM</strong>
-                        </div>
-                        <div class="d-flex justify-content-between text-slate-600">
-                            <span>Pedestrian Route Plan:</span>
-                            <strong class="text-emerald-700">Multi-Stall Trajectory Active</strong>
-                        </div>
-                    </div>
-
-                    <a href="{{ route('market.explorer', ['market_id' => 1]) }}" class="d-block text-center w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition text-decoration-none">
-                        View Interactive Stall Map
-                    </a>
-                </div>
+                <figure class="market-hero-visual">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=85" alt="Fresh produce displayed at a local farmers market" fetchpriority="high">
+                    <figcaption><span>Market day</span><strong>Downtown Civic Plaza</strong><a href="{{ route('market.explorer', ['market_id' => 1]) }}">View stalls <span aria-hidden="true">&rarr;</span></a></figcaption>
+                </figure>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Category Pills Strip -->
     <div class="mb-10">

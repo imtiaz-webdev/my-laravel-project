@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use App\Models\FarmerProfile;
 use App\Models\FavoriteFarmer;
 use App\Models\Market;
@@ -46,7 +47,7 @@ class CustomerController extends Controller
             $totalPersonalCo2Saved = 14.55;
         }
 
-        return view('customer.dashboard', compact('user', 'activeOrders', 'pastOrders', 'favoriteFarmers', 'totalPersonalCo2Saved'));
+        return view('frontend.customer.dashboard', compact('user', 'activeOrders', 'pastOrders', 'favoriteFarmers', 'totalPersonalCo2Saved'));
     }
 
     public function cart()
@@ -95,7 +96,7 @@ class CustomerController extends Controller
 
         session()->put('basket', $cart);
 
-        return view('customer.cart', compact('itemsByFarmer', 'totalBasketAmount', 'totalCo2Saved'));
+        return view('frontend.customer.cart', compact('itemsByFarmer', 'totalBasketAmount', 'totalCo2Saved'));
     }
 
     public function addToCart(Request $request)
@@ -225,7 +226,7 @@ class CustomerController extends Controller
             $totalCo2 += $co2;
         }
 
-        return view('customer.checkout', compact('itemsByFarmer', 'grandTotal', 'totalCo2'));
+        return view('frontend.customer.checkout', compact('itemsByFarmer', 'grandTotal', 'totalCo2'));
     }
 
     public function processOrder(Request $request)
@@ -325,7 +326,7 @@ class CustomerController extends Controller
             ->where('customer_id', Auth::id())
             ->firstOrFail();
 
-        return view('customer.order_detail', compact('order'));
+        return view('frontend.customer.order_detail', compact('order'));
     }
 
     /**
@@ -372,7 +373,7 @@ class CustomerController extends Controller
             }
         }
 
-        return view('customer.pickup_route', compact('user', 'activeMarket', 'waypoints', 'orders'));
+        return view('frontend.customer.pickup_route', compact('user', 'activeMarket', 'waypoints', 'orders'));
     }
 
     public function storeReview(Request $request)

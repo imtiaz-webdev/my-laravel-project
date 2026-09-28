@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\FarmerProfile;
 use App\Models\Market;
@@ -52,7 +53,7 @@ class MarketplaceController extends Controller
         $totalFarmersCount = FarmerProfile::where('is_approved', true)->count();
         $totalProductsCount = Product::count();
 
-        return view('marketplace.index', compact(
+        return view('frontend.marketplace.index', compact(
             'categories',
             'markets',
             'zeroWasteProducts',
@@ -118,7 +119,7 @@ class MarketplaceController extends Controller
             }
         }
 
-        return view('marketplace.explorer', compact('markets', 'allMarkets', 'categories', 'stallsData', 'selectedMarketId', 'selectedCategory', 'marketDay'));
+        return view('frontend.marketplace.explorer', compact('markets', 'allMarkets', 'categories', 'stallsData', 'selectedMarketId', 'selectedCategory', 'marketDay'));
     }
 
     public function farmerShow($slug)
@@ -130,7 +131,7 @@ class MarketplaceController extends Controller
         $zeroWasteItems = $farmer->products->where('is_zero_waste_active', true);
         $standardItems = $farmer->products->where('is_zero_waste_active', false);
 
-        return view('marketplace.farmer', compact('farmer', 'zeroWasteItems', 'standardItems'));
+        return view('frontend.marketplace.farmer', compact('farmer', 'zeroWasteItems', 'standardItems'));
     }
 
     public function productShow($slug)
@@ -144,7 +145,7 @@ class MarketplaceController extends Controller
             ->take(3)
             ->get();
 
-        return view('marketplace.product', compact('product', 'relatedProducts'));
+        return view('frontend.marketplace.product', compact('product', 'relatedProducts'));
     }
 
     /**
@@ -185,11 +186,11 @@ class MarketplaceController extends Controller
 
     public function termsOfService()
     {
-        return view('legal.terms');
+        return view('frontend.legal.terms');
     }
 
     public function privacyPolicy()
     {
-        return view('legal.privacy');
+        return view('frontend.legal.privacy');
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\FarmerProfile;
 use App\Models\Market;
@@ -71,7 +72,7 @@ class VendorController extends Controller
             ->where('is_zero_waste_active', true)
             ->count();
 
-        return view('vendor.dashboard', compact(
+        return view('frontend.vendor.dashboard', compact(
             'farmer',
             'totalOrdersCount',
             'totalRevenue',
@@ -93,7 +94,7 @@ class VendorController extends Controller
 
         $categories = Category::all();
 
-        return view('vendor.inventory', compact('farmer', 'products', 'categories'));
+        return view('frontend.vendor.inventory', compact('farmer', 'products', 'categories'));
     }
 
     public function toggleZeroWaste(Request $request, $id)
@@ -269,7 +270,7 @@ class VendorController extends Controller
             'completed' => Order::where('farmer_profile_id', $farmer->id)->where('status', 'completed')->count(),
         ];
 
-        return view('vendor.orders', compact('farmer', 'orders', 'tab', 'counts'));
+        return view('frontend.vendor.orders', compact('farmer', 'orders', 'tab', 'counts'));
     }
 
     public function updateOrderStatus(Request $request, $id)
@@ -355,7 +356,7 @@ class VendorController extends Controller
     {
         $farmer = $this->getFarmerProfile();
         $markets = Market::where('status', 'active')->get();
-        return view('vendor.profile', compact('farmer', 'markets'));
+        return view('frontend.vendor.profile', compact('farmer', 'markets'));
     }
 
     public function updateProfile(Request $request)

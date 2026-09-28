@@ -1,64 +1,49 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Supervisor Governance Hub | MarketLink Admin')
+@section('page-heading', 'Platform overview')
 
 @section('content')
 <div class="container py-4">
 
-    <!-- Header Banner -->
-    <div class="ml-card p-4 mb-4">
-        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
-            <div>
-                <span class="badge bg-dark text-white px-2 py-1 small">Super-Visor Directorate</span>
-                <h2 class="mb-1 fw-bold">Platform Governance Dashboard</h2>
-                <div class="text-muted small">System-wide monitoring of regional farmers markets, vendor certifications, and carbon ledger</div>
-            </div>
-
-            <div class="d-flex gap-2">
-                <a href="{{ route('admin.farmers') }}" class="btn btn-sm btn-forest">
-                    <i class="fa-solid fa-user-check me-1"></i> Farmer Approvals
-                </a>
-                <a href="{{ route('admin.markets') }}" class="btn btn-sm btn-outline-forest">
-                    <i class="fa-solid fa-map-location-dot me-1"></i> Market Venues
-                </a>
-                <a href="{{ route('admin.reports.export_csv') }}" class="btn btn-sm btn-ochre">
-                    <i class="fa-solid fa-file-csv me-1"></i> Download Audit CSV
-                </a>
-            </div>
+    <div class="admin-action-row mb-4">
+        <p>Live view of regional sales, producer access, market capacity, and environmental impact.</p>
+        <div class="d-flex gap-2">
+            <a href="{{ route('admin.orders') }}" class="btn btn-sm btn-forest">Review orders</a>
+            <a href="{{ route('admin.reports.export_csv') }}" class="btn btn-sm btn-outline-secondary">Export report</a>
         </div>
     </div>
 
-    <!-- Metrics Matrix -->
-    <div class="row g-4 mb-5">
+    <div class="row g-0 admin-dashboard-metrics mb-5">
         <div class="col-xl-3 col-sm-6">
-            <div class="ml-card p-3 h-100">
-                <div class="small text-muted mb-1 text-uppercase fw-semibold" style="font-size: 0.72rem;">Gross Market Volume</div>
-                <div class="font-heading fw-bold fs-3 text-success">${{ number_format($totalGrossVolume, 2) }}</div>
-                <div class="small text-muted mt-2">Total settled + confirmed pre-orders</div>
+            <div class="admin-metric">
+                <div class="admin-metric-label">Gross market volume</div>
+                <div class="admin-metric-value">${{ number_format($totalGrossVolume, 2) }}</div>
+                <div class="admin-metric-note">Settled and confirmed pre-orders</div>
             </div>
         </div>
 
         <div class="col-xl-3 col-sm-6">
-            <div class="ml-card p-3 h-100">
-                <div class="small text-muted mb-1 text-uppercase fw-semibold" style="font-size: 0.72rem;">Producer Stalls</div>
-                <div class="font-heading fw-bold fs-3 text-dark">{{ $totalFarmersCount }} Registered</div>
-                <div class="small text-muted mt-2">Approved & Active: <strong>{{ $approvedFarmersCount }}</strong></div>
+            <div class="admin-metric">
+                <div class="admin-metric-label">Producer stalls</div>
+                <div class="admin-metric-value">{{ $totalFarmersCount }}</div>
+                <div class="admin-metric-note">{{ $approvedFarmersCount }} approved and active</div>
             </div>
         </div>
 
         <div class="col-xl-3 col-sm-6">
-            <div class="ml-card p-3 h-100">
-                <div class="small text-muted mb-1 text-uppercase fw-semibold" style="font-size: 0.72rem;">Physical Market Venues</div>
-                <div class="font-heading fw-bold fs-3 text-dark">{{ $totalMarketsCount }} Venues</div>
-                <div class="small text-muted mt-2">Active OpenStreetMap hubs</div>
+            <div class="admin-metric">
+                <div class="admin-metric-label">Market venues</div>
+                <div class="admin-metric-value">{{ $totalMarketsCount }}</div>
+                <div class="admin-metric-note">Active pickup locations</div>
             </div>
         </div>
 
         <div class="col-xl-3 col-sm-6">
-            <div class="ml-card p-3 h-100">
-                <div class="small text-muted mb-1 text-uppercase fw-semibold" style="font-size: 0.72rem;">Platform Carbon Offset</div>
-                <div class="font-heading fw-bold fs-3 text-success">{{ number_format($totalCarbonOffset, 1) }} kg</div>
-                <div class="small text-muted mt-2">CO2 saved from supply chain cuts</div>
+            <div class="admin-metric">
+                <div class="admin-metric-label">Carbon avoided</div>
+                <div class="admin-metric-value">{{ number_format($totalCarbonOffset, 1) }} kg</div>
+                <div class="admin-metric-note">Recorded across platform orders</div>
             </div>
         </div>
     </div>

@@ -48,6 +48,47 @@ class MarketLinkIntegrationTest extends TestCase
         $privacy->assertSee('Privacy Policy');
     }
 
+    public function test_admin_routes_require_authentication(): void
+    {
+        $this->get('/admin/dashboard')->assertRedirect('/login');
+        $this->get('/admin/products')->assertRedirect('/login');
+        $this->get('/demo-switch/admin')->assertNotFound();
+    }
+
+    public function test_login_page_renders_without_demo_credentials(): void
+    {
+        $this->get('/login')
+            ->assertOk()
+            ->assertDontSee('Demo Pass')
+            ->assertDontSee('Instant Direct Switch')
+            ->assertDontSee('admin@marketlink.org');
+    }
+
+    public function test_wrong_password_cannot_authenticate_an_admin(): void
+    {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+            'status' => 'active',
+        ]);
+
+        $this->from('/login')->post('/login', [
+            'email' => $admin->email,
+            'password' => 'incorrect-password',
+        ])->assertRedirect('/login')->assertSessionHasErrors('email');
+
+        $this->get('/admin/dashboard')->assertRedirect('/login');
+    }
+
+    public function test_non_admin_users_are_forbidden_from_admin_routes(): void
+    {
+        $customer = User::factory()->create([
+            'role' => 'customer',
+            'status' => 'active',
+        ]);
+
+        $this->actingAs($customer)->get('/admin/dashboard')->assertForbidden();
+    }
+
     public function test_customer_dashboard_and_route_optimizer(): void
     {
         $customer = User::where('role', 'customer')->first();

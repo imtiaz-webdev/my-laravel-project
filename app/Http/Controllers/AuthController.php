@@ -17,7 +17,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return $this->redirectBasedOnRole(Auth::user());
         }
-        return view('auth.login');
+        return view('frontend.auth.login');
     }
 
     public function login(Request $request)
@@ -50,7 +50,7 @@ class AuthController extends Controller
             return $this->redirectBasedOnRole(Auth::user());
         }
         $markets = Market::where('status', 'active')->get();
-        return view('auth.register', compact('markets'));
+        return view('frontend.auth.register', compact('markets'));
     }
 
     public function register(Request $request)
@@ -108,27 +108,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('home')->with('success', 'You have been successfully signed out.');
-    }
-
-    /**
-     * Demo role switcher for TechWiz judges to evaluate roles instantly.
-     */
-    public function quickSwitch($role)
-    {
-        $targetEmail = match ($role) {
-            'admin' => 'admin@marketlink.org',
-            'vendor', 'farmer' => 'farmer@marketlink.org',
-            'customer' => 'customer@marketlink.org',
-            default => 'customer@marketlink.org',
-        };
-
-        $user = User::where('email', $targetEmail)->first();
-        if ($user) {
-            Auth::login($user);
-            return $this->redirectBasedOnRole($user)->with('success', "Switched to demo role: {$user->name} (" . ucfirst($user->role) . ")");
-        }
-
-        return redirect()->route('login');
     }
 
     protected function redirectBasedOnRole(User $user)

@@ -174,10 +174,21 @@
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    location.reload();
+                    if (window.showEmeraldToast) {
+                        window.showEmeraldToast('Market basket quantity updated!', 'success');
+                    }
+                    setTimeout(() => location.reload(), 400);
                 } else {
-                    alert(data.message || 'Exceeds stall inventory.');
-                    location.reload();
+                    if (window.showEmeraldToast) {
+                        window.showEmeraldToast(data.message || 'Exceeds stall inventory.', 'notice');
+                    } else {
+                        alert(data.message || 'Exceeds stall inventory.');
+                    }
+                }
+            })
+            .catch(() => {
+                if (window.showEmeraldToast) {
+                    window.showEmeraldToast('Unable to connect to stall inventory. Please retry.', 'notice');
                 }
             });
         });

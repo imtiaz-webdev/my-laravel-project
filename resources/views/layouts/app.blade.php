@@ -63,33 +63,10 @@
 
     @stack('styles')
 </head>
-<body class="bg-[#F9FAFB] text-[#1E293B] antialiased">
-
-    <!-- TechWiz Judge Demo Role Switcher Header Bar -->
-    <div class="bg-[#0F172A] text-slate-300 py-1.5 px-4 text-xs border-b border-slate-800">
-        <div class="container mx-auto d-flex justify-content-between align-items-center flex-wrap gap-2">
-            <div class="d-flex align-items-center flex-wrap gap-2">
-                <span class="text-amber-400 font-bold uppercase tracking-wider text-[11px]">TechWiz Evaluation Suite</span>
-                <span class="opacity-60 text-slate-400">Instant Role Switch:</span>
-                <a href="{{ route('demo.switch', 'customer') }}" class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 hover:bg-emerald-900 border border-emerald-800/60 font-semibold transition" title="Switch to Customer Maya Lin">
-                    <i class="fa-solid fa-user-check me-1"></i> Customer (Maya)
-                </a>
-                <a href="{{ route('demo.switch', 'vendor') }}" class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 font-semibold transition" title="Switch to Farmer Silas Thorne">
-                    <i class="fa-solid fa-tractor me-1 text-emerald-400"></i> Farmer (Silas)
-                </a>
-                <a href="{{ route('demo.switch', 'admin') }}" class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 font-semibold transition" title="Switch to Director Eleanor Vance">
-                    <i class="fa-solid fa-shield-halved me-1 text-amber-400"></i> Admin (Eleanor)
-                </a>
-            </div>
-            <div class="d-none d-md-flex align-items-center gap-2 text-slate-400 text-[11px]">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>eGreen Basket Theme &bull; Offline Ready Cartography</span>
-            </div>
-        </div>
-    </div>
+<body class="public-layout bg-[#F4F5F1] text-[#1E293B] antialiased">
 
     <!-- Redesigned Header: Translucent Glassmorphism (backdrop-blur-md) with Category Pills -->
-    <header class="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)]">
+    <header class="public-site-header sticky top-0 z-50 bg-white border-b border-slate-200">
         <div class="container mx-auto px-3 px-md-4 py-2.5">
             <div class="d-flex align-items-center justify-content-between">
 
@@ -141,6 +118,13 @@
                             <a href="{{ route('admin.dashboard') }}" class="px-3.5 py-1.5 rounded-full text-sm font-semibold transition {{ request()->routeIs('admin.dashboard') ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:text-emerald-700' }}">
                                 Supervisor Hub
                             </a>
+                            <a href="{{ route('admin.products') }}" class="px-3.5 py-1.5 rounded-full text-sm font-semibold transition {{ request()->routeIs('admin.products') ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:text-emerald-700' }}">
+                                Produce Catalog
+                            </a>
+                            <a href="{{ route('admin.orders') }}" class="px-3.5 py-1.5 rounded-full text-sm font-semibold transition d-flex align-items-center gap-1.5 {{ request()->routeIs('admin.orders') ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:text-emerald-700' }}">
+                                <i class="fa-solid fa-qrcode {{ request()->routeIs('admin.orders') ? 'text-white' : 'text-emerald-600' }}"></i>
+                                Orders &amp; QR Desk
+                            </a>
                             <a href="{{ route('admin.reports') }}" class="px-3.5 py-1.5 rounded-full text-sm font-semibold transition {{ request()->routeIs('admin.reports') ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:text-emerald-700' }}">
                                 Audit Reports
                             </a>
@@ -189,6 +173,8 @@
                                     <li><a class="dropdown-item rounded-lg py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" href="{{ route('vendor.orders') }}"><i class="fa-solid fa-clipboard-check text-emerald-600 me-2"></i> Order Fulfillment</a></li>
                                 @elseif(auth()->user()->isAdmin())
                                     <li><a class="dropdown-item rounded-lg py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" href="{{ route('admin.dashboard') }}"><i class="fa-solid fa-sliders text-emerald-600 me-2"></i> Directorate Hub</a></li>
+                                    <li><a class="dropdown-item rounded-lg py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" href="{{ route('admin.products') }}"><i class="fa-solid fa-basket-shopping text-emerald-600 me-2"></i> Produce Catalog</a></li>
+                                    <li><a class="dropdown-item rounded-lg py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" href="{{ route('admin.orders') }}"><i class="fa-solid fa-qrcode text-emerald-600 me-2"></i> Orders &amp; QR Desk</a></li>
                                     <li><a class="dropdown-item rounded-lg py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" href="{{ route('admin.farmers') }}"><i class="fa-solid fa-id-badge text-emerald-600 me-2"></i> Farmer Approvals</a></li>
                                     <li><a class="dropdown-item rounded-lg py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" href="{{ route('admin.markets') }}"><i class="fa-solid fa-location-dot text-emerald-600 me-2"></i> Physical Venues</a></li>
                                     <li><a class="dropdown-item rounded-lg py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" href="{{ route('admin.reports') }}"><i class="fa-solid fa-file-csv text-emerald-600 me-2"></i> Audit Exporter</a></li>
@@ -209,6 +195,20 @@
 
             </div>
         </div>
+        <nav class="public-mobile-nav d-lg-none" aria-label="Main navigation">
+            <a href="{{ route('home') }}" @class(['active' => request()->routeIs('home')])>Market</a>
+            <a href="{{ route('market.explorer') }}" @class(['active' => request()->routeIs('market.explorer')])>Explore</a>
+            <a href="{{ route('customer.cart') }}">Basket</a>
+            @guest
+                <a href="{{ route('login') }}">Sign in</a>
+            @elseif(auth()->user()->isAdmin())
+                <a href="{{ route('admin.dashboard') }}">Admin</a>
+            @elseif(auth()->user()->isVendor())
+                <a href="{{ route('vendor.dashboard') }}">Farm portal</a>
+            @else
+                <a href="{{ route('customer.dashboard') }}">Orders</a>
+            @endguest
+        </nav>
     </header>
 
     <!-- Global Alerts (Clean Emerald & Sleek Alerts) -->
@@ -284,7 +284,7 @@
     </div>
 
     <!-- Footer with Working Legal Links (Rule 26 & 27 Compliant) -->
-    <footer class="bg-white border-t border-slate-200 mt-16 pt-12 pb-8 text-slate-600">
+    <footer class="public-site-footer bg-slate-50 border-t border-slate-200 mt-16 pt-12 pb-8 text-slate-600">
         <div class="container mx-auto px-4">
             <div class="row g-4 mb-8">
                 <div class="col-lg-4 col-md-6">

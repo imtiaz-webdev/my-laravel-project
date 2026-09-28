@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Platform Analytics & Audit Reports | MarketLink Admin')
+@section('page-heading', 'Audit reports')
 
 @section('content')
 <div class="container py-4">

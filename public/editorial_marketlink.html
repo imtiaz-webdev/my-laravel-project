@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketLink &bull; Regional Agricultural Ledger &amp; Produce Registry</title>
+
+    <!-- Refined Typography: Newsreader (Editorial Serif) & IBM Plex Sans (Crisp Modern Sans) -->
+    <!-- BANNED: Inter, Geist, Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        /* BANNED: Neon colors, Basic pastel colors, Purple and black, Pure white */
+                        canvas: '#F4F1EA',       /* Warm tactile linen/bone paper - NEVER #FFFFFF */
+                        surface: '#EAE5D9',      /* Archival stone tone */
+                        surfaceLight: '#FAF8F4', /* Off-white card surface - NOT #FFFFFF */
+                        ink: {
+                            base: '#171A18',     /* Deep carbon iron ink */
+                            muted: '#5A5E59',    /* Archival charcoal */
+                            faint: '#8B8F89',    /* Faint pencil annotation */
+                        },
+                        botanical: {
+                            dark: '#14281D',     /* Deep forest pitch */
+                            pine: '#1D3B2B',     /* Solid botanical dark green */
+                            moss: '#2E523E',     /* Rich field moss */
+                        },
+                        brass: '#8A6836',        /* Warm oxidized brass */
+                        divider: '#DCD6C8',      /* Architectural line rule */
+                    },
+                    fontFamily: {
+                        serif: ['Newsreader', 'Georgia', 'serif'],
+                        sans: ['IBM Plex Sans', 'Helvetica Neue', 'sans-serif'],
+                        mono: ['IBM Plex Mono', 'monospace'],
+                    },
+                    borderRadius: {
+                        /* BANNED: Soft corner radius, rounded-2xl, rounded-3xl */
+                        none: '0px',
+                        sm: '2px',
+                    },
+                    boxShadow: {
+                        /* BANNED: Drop shadows */
+                        none: 'none',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Strict Design Rules Enforcement:
+           - No drop shadows anywhere
+           - No harsh gradients
+           - No liquid glass / backdrop blur
+           - No hover animation transforms (no translate, no scale)
+           - No pure white #ffffff
+           - Crisp 0px to 2px architectural borders
+        */
+        * {
+            box-shadow: none !important;
+            border-radius: 0px !important;
+        }
+
+        body {
+            background-color: #F4F1EA;
+            color: #171A18;
+            font-family: 'IBM Plex Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Editorial Typography */
+        h1, h2, h3, .font-editorial {
+            font-family: 'Newsreader', Georgia, serif;
+            font-feature-settings: "liga" 1, "kern" 1;
+            letter-spacing: -0.015em;
+        }
+
+        /* Architectural Borders */
+        .border-rule {
+            border-color: #DCD6C8;
+        }
+
+        /* Tabular Numbers */
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Skeleton Pulse without Orbs or Rainbows */
+        .archival-skeleton {
+            background-color: #E3DDD0;
+            animation: archivalPulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes archivalPulse {
+            0%, 100% { opacity: 0.55; }
+            50% { opacity: 1; }
+        }
+
+        /* Instant Crisp Hover (No Motion / No Translation) */
+        .btn-architectural {
+            background-color: #1D3B2B;
+            color: #F4F1EA;
+            border: 1px solid #14281D;
+            transition: background-color 0.1s ease, color 0.1s ease;
+        }
+        .btn-architectural:hover {
+            background-color: #14281D;
+            color: #FAF8F4;
+        }
+
+        .btn-outline-architectural {
+            background-color: transparent;
+            color: #171A18;
+            border: 1px solid #171A18;
+            transition: background-color 0.1s ease, color 0.1s ease;
+        }
+        .btn-outline-architectural:hover {
+            background-color: #171A18;
+            color: #F4F1EA;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#F4F1EA] text-[#171A18]">
+
+    <!-- Official Registry Header Bar (Solid, Matte, Archival) -->
+    <div class="border-b border-[#DCD6C8] bg-[#EAE5D9] px-4 py-2 text-xs font-mono text-[#5A5E59]">
+        <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-3">
+                <span class="text-[#14281D] font-semibold tracking-wider uppercase">REGIONAL LEDGER // SEC. 04</span>
+                <span class="text-[#8B8F89]">|</span>
+                <span>CENTRAL CIVIC TERMINAL</span>
+                <span class="text-[#8B8F89]">|</span>
+                <span>AUTHENTICATED HARVEST REGISTRY</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span>SESSION: AUTUMN CUT</span>
+                <span>TIME: 05:30 PACIFIC</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar: Solid Matte Canvas, Crisp Border, Strict 0px Radius, No Blur -->
+    <!-- BANNED: Liquid glass, backdrop-blur, rounded pills, Lucide icons -->
+    <header class="border-b border-[#DCD6C8] bg-[#F4F1EA] sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-6">
+
+            <!-- Architectural Wordmark -->
+            <a href="#" class="flex items-baseline gap-2.5 text-decoration-none">
+                <span class="font-editorial text-2xl font-bold tracking-tight text-[#14281D]">MarketLink</span>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-[#5A5E59] border border-[#DCD6C8] px-1.5 py-0.5 bg-[#FAF8F4]">
+                    eGreen Registry
+                </span>
+            </a>
+
+            <!-- Discrete Navigation Links (No rounded pills, No icons) -->
+            <nav class="hidden md:flex items-center gap-6 text-xs uppercase tracking-wider font-semibold text-[#5A5E59]">
+                <a href="#ledger" class="text-[#14281D] border-b-2 border-[#14281D] pb-1">Harvest Ledger</a>
+                <a href="#demo" class="hover:text-[#14281D] pb-1">Interactive Order Demo</a>
+                <a href="#growers" class="hover:text-[#14281D] pb-1">Registered Smallholders</a>
+                <a href="#compliance" class="hover:text-[#14281D] pb-1">Soil Standards</a>
+            </nav>
+
+            <!-- Order Registry Status & Real Functional Drawer Trigger -->
+            <div class="flex items-center gap-3">
+                <div class="text-right hidden sm:block">
+                    <span class="block text-[10px] font-mono text-[#8B8F89] uppercase">Active Reservation</span>
+                    <span class="block text-xs font-mono font-bold text-[#14281D]" id="nav-cart-status">0 items / $0.00</span>
+                </div>
+                <button id="open-ledger-btn" class="btn-architectural px-3.5 py-2 text-xs uppercase tracking-wider font-bold">
+                    View Order Sheet
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full">
+
+        <!-- Hero Section: Broadsheet Editorial, Zero Gradients, Zero Orbs, Zero Emojis -->
+        <!-- BANNED: Harsh gradients, radial orbs, emojis, em dashes, "It's not X, it's Y" copy -->
+        <section class="border border-[#DCD6C8] bg-[#FAF8F4] p-6 sm:p-10 mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <div class="lg:col-span-8">
+                    <div class="font-mono text-xs text-[#5A5E59] uppercase tracking-widest mb-3 flex items-center gap-2">
+                        <span>FARM TO TABLE DISPATCH</span>
+                        <span>/</span>
+                        <span>DOCUMENT 2026.09</span>
+                    </div>
+
+                    <!-- Direct, authentic editorial headline without cliché marketing copy -->
+                    <h1 class="text-3xl sm:text-5xl font-normal leading-tight text-[#14281D] mb-4">
+                        Direct Farm Procurement for the San Francisco Civic Market.
+                    </h1>
+
+                    <p class="text-base text-[#5A5E59] leading-relaxed max-w-2xl mb-6">
+                        Smallholders register morning yields at dawn. Consumers reserve crates directly from verified growers before 07:00. Orders settle in cash at physical stalls with printed cryptographic tokens.
+                    </p>
+
+                    <!-- Real Operational Data Manifest (No 3 cards in a row, No bento grid) -->
+                    <div class="border-t border-[#DCD6C8] pt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono text-xs">
+                        <div>
+                            <span class="block text-[#8B8F89] text-[10px] uppercase">Active Stalls</span>
+                            <span class="text-sm font-bold text-[#14281D]">04 Certified</span>
+                        </div>
+                        <div>
+                            <span class="block text-[#8B8F89] text-[10px] uppercase">Total Listed Yield</span>
+                            <span class="text-sm font-bold text-[#14281D]">1,480 kg</span>
+                        </div>
+                        <div>
+                            <span class="block text-[#8B8F89] text-[10px] uppercase">Transit Avoided</span>
+                            <span class="text-sm font-bold text-[#14281D]">142.5 kg CO2</span>
+                        </div>
+                        <div>
+                            <span class="block text-[#8B8F89] text-[10px] uppercase">Intermediary Fee</span>
+                            <span class="text-sm font-bold text-[#14281D]">0.00 percent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verified Market Notice Board (Asymmetrical 4-column side ledger) -->
+                <div class="lg:col-span-4 border border-[#DCD6C8] bg-[#EAE5D9] p-5">
+                    <div class="font-mono text-[11px] text-[#14281D] font-bold uppercase tracking-wider border-b border-[#DCD6C8] pb-2 mb-3">
+                        Operating Schedule Notice
+                    </div>
+                    <div class="text-xs text-[#5A5E59] space-y-2.5">
+                        <div class="flex justify-between">
+                            <span class="font-mono text-[#8B8F89]">Venue:</span>
+                            <span class="font-semibold text-[#14281D]">Civic Plaza, Lot 2</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-mono text-[#8B8F89]">Packing:</span>
+                            <span class="font-semibold text-[#14281D]">05:30 to 07:30</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-mono text-[#8B8F89]">Collection:</span>
+                            <span class="font-semibold text-[#14281D]">08:00 to 13:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-mono text-[#8B8F89]">Settlement:</span>
+                            <span class="font-semibold text-[#14281D]">Cash on Inspection</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-[#DCD6C8]">
+                        <button id="toggle-skeleton-btn" class="w-full btn-outline-architectural py-2 text-xs font-mono uppercase tracking-wider font-semibold">
+                            Simulate Ledger Fetch
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Real Product Demonstration: Live Interactive Harvest Order Ledger -->
+        <!-- BANNED: No real product demos, 3 feature cards in a row, bento grids, emojis -->
+        <section class="border border-[#DCD6C8] bg-[#FAF8F4] mb-8" id="demo">
+            <div class="border-b border-[#DCD6C8] px-6 py-4 flex flex-wrap justify-between items-center gap-4 bg-[#EAE5D9]">
+                <div>
+                    <h2 class="font-editorial text-xl font-bold text-[#14281D]">
+                        Daily Produce Ledger and Pre-Order Terminal
+                    </h2>
+                    <p class="text-xs text-[#5A5E59] mt-0.5">
+                        Select morning harvest units below. Items allocate immediately to your session manifest.
+                    </p>
+                </div>
+                
+                <!-- Category Filter Tabs (Sharp, architectural, no pills) -->
+                <div class="flex items-center gap-1 font-mono text-xs">
+                    <button class="filter-tab px-3 py-1 bg-[#14281D] text-[#F4F1EA] border border-[#14281D]" data-filter="all">
+                        All Yields [4]
+                    </button>
+                    <button class="filter-tab px-3 py-1 bg-transparent text-[#5A5E59] border border-[#DCD6C8] hover:bg-[#E3DDD0]" data-filter="field">
+                        Field Crops
+                    </button>
+                    <button class="filter-tab px-3 py-1 bg-transparent text-[#5A5E59] border border-[#DCD6C8] hover:bg-[#E3DDD0]" data-filter="surplus">
+                        Surplus Batch
+                    </button>
+                </div>
+            </div>
+
+            <!-- Skeleton Loader State (Demonstrating required skeleton state) -->
+            <!-- BANNED: No skeleton loaders -->
+            <div id="skeleton-loader-state" class="hidden p-6 space-y-4">
+                <div class="font-mono text-xs text-[#8B8F89] uppercase tracking-wider mb-2">
+                    Querying Civic Market Database...
+                </div>
+                <div class="archival-skeleton h-12 w-full"></div>
+                <div class="archival-skeleton h-12 w-full"></div>
+                <div class="archival-skeleton h-12 w-full"></div>
+                <div class="archival-skeleton h-12 w-full"></div>
+            </div>
+
+            <!-- Real Tabular Ledger (Broadsheet format instead of 3 cards in a row) -->
+            <div id="live-ledger-table" class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                        <tr class="border-b border-[#DCD6C8] bg-[#F4F1EA] font-mono text-[10px] text-[#5A5E59] uppercase tracking-wider">
+                            <th class="py-3 px-4">Item Ref</th>
+                            <th class="py-3 px-4">Description</th>
+                            <th class="py-3 px-4">Producer and Stall</th>
+                            <th class="py-3 px-4">Harvest Log</th>
+                            <th class="py-3 px-4">Unit Price</th>
+                            <th class="py-3 px-4">Stock</th>
+                            <th class="py-3 px-4 text-right">Allocation</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-[#DCD6C8]">
+
+                        <!-- Produce Row 1 -->
+                        <tr class="produce-item hover:bg-[#F4F1EA]" data-category="surplus">
+                            <td class="py-3.5 px-4 font-mono text-[#8B8F89]">PROD-0101</td>
+                            <td class="py-3.5 px-4">
+                                <span class="font-bold text-[#14281D] block">Heirloom Vine Tomatoes</span>
+                                <span class="text-[#5A5E59] text-[11px]">Field-ripened heritage varieties, 3 lb wooden crate</span>
+                            </td>
+                            <td class="py-3.5 px-4">
+                                <span class="text-[#14281D] font-medium block">Sunburst Organic Farm</span>
+                                <span class="text-[#8B8F89] font-mono text-[10px]">Stall A-02 &bull; CCOF Certified</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-mono">
+                                <!-- Clean formatted label: No raw decimals -->
+                                <span class="text-[#8A6836] font-semibold block">Harvested 6 hours ago</span>
+                                <span class="text-[#8B8F89] text-[10px]">Surplus cut applied</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-mono text-sm font-bold text-[#14281D] tabular-nums">
+                                $4.20 <span class="text-[10px] text-[#8B8F89] font-normal">/ crate</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-mono text-[#5A5E59] tabular-nums">
+                                14 crates
+                            </td>
+                            <td class="py-3.5 px-4 text-right">
+                                <button class="btn-add-item btn-architectural px-3 py-1.5 font-mono text-xs font-semibold"
+                                        data-id="101" data-name="Heirloom Vine Tomatoes" data-price="4.20" data-unit="crate">
+                                    + Add 1 Crate
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Produce Row 2 -->
+                        <tr class="produce-item hover:bg-[#F4F1EA]" data-category="field">
+                            <td class="py-3.5 px-4 font-mono text-[#8B8F89]">PROD-0102</td>
+                            <td class="py-3.5 px-4">
+                                <span class="font-bold text-[#14281D] block">Coastal Albion Strawberries</span>
+                                <span class="text-[#5A5E59] text-[11px]">Picked in morning dew, high brix sugar index</span>
+                            </td>
+                            <td class="py-3.5 px-4">
+                                <span class="text-[#14281D] font-medium block">Berry Hill Organics</span>
+                                <span class="text-[#8B8F89] font-mono text-[10px]">Stall A-12 &bull; Salmon-Safe</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-mono">
+                                <span class="text-[#14281D] font-semibold block">Harvested 2 hours ago</span>
+                                <span class="text-[#8B8F89] text-[10px]">Morning dispatch</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-mono text-sm font-bold text-[#14281D] tabular-nums">
+                                $5.50 <span class="text-[10px] text-[#8B8F89] font-normal">/ flat</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-mono text-[#5A5E59] tabular-nums">
+                                20 flats
+                            </td>
+                            <td class="py-3.5 px-4 text-right">
+                                <button class="btn-add-item btn-architectural px-3 py-1.5 font-mono text-xs font-semibold"
+                                        data-id="102" data-name="Albion Strawberries" data-price="5.50" data-unit="flat">
+                                    + Add 1 Flat
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Produce Row 3 -->
+                        <tr class="produce-item hover:bg-[#F4F1EA]" data-category="field">
+                            <td class="py-3.5 px-4 font-mono text-[#8B8F89]">PROD-0103</td>
+                            <td class="py-3.5 px-4">
+                                <span class="font-bold text-[#14281D] block">Rainbow Bunch Carrots</span>
+                                <span class="text-[#5A5E59] text-[11px]">Sandy loam pull, washed in spring water</span>
+                            </td>
+                            <td class="py-3.5 px-4">
+                                <span class="text-[#14281D] font-medium block">Valley Root Regenerative</span>
+                                <span class="text-[#8B8F89] font-mono text-[10px]">Stall B-04 &bull; Demeter Biodynamic</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-mono">
+                                <span class="text-[#14281D] font-semibold block">Harvested 4 hours ago</span>
+                                <span class="text-[#8B8F89] text-[10px]">Root cold store</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-mono text-sm font-bold text-[#14281D] tabular-nums">
+                                $3.80 <span class="text-[10px] text-[#8B8F89] font-normal">/ bunch</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-mono text-[#5A5E59] tabular-nums">
+                                18 bunches
+                            </td>
+                            <td class="py-3.5 px-4 text-right">
+                                <button class="btn-add-item btn-architectural px-3 py-1.5 font-mono text-xs font-semibold"
+                                        data-id="103" data-name="Rainbow Carrots" data-price="3.80" data-unit="bunch">
+                                    + Add 1 Bunch
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Produce Row 4 -->
+                        <tr class="produce-item hover:bg-[#F4F1EA]" data-category="surplus">
+                            <td class="py-3.5 px-4 font-mono text-[#8B8F89]">PROD-0104</td>
+                            <td class="py-3.5 px-4">
+                                <span class="font-bold text-[#14281D] block">Hydroponic Baby Spinach</span>
+                                <span class="text-[#5A5E59] text-[11px]">Root system intact, packed in breathable paper sleeves</span>
+                            </td>
+                            <td class="py-3.5 px-4">
+                                <span class="text-[#14281D] font-medium block">Highland Greens Collective</span>
+                                <span class="text-[#8B8F89] font-mono text-[10px]">Stall C-08 &bull; OMRI Compliant</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-mono">
+                                <span class="text-[#8A6836] font-semibold block">Harvested 3 hours ago</span>
+                                <span class="text-[#8B8F89] text-[10px]">Surplus cut applied</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-mono text-sm font-bold text-[#14281D] tabular-nums">
+                                $3.15 <span class="text-[10px] text-[#8B8F89] font-normal">/ sleeve</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-mono text-[#5A5E59] tabular-nums">
+                                12 sleeves
+                            </td>
+                            <td class="py-3.5 px-4 text-right">
+                                <button class="btn-add-item btn-architectural px-3 py-1.5 font-mono text-xs font-semibold"
+                                        data-id="104" data-name="Hydro Baby Spinach" data-price="3.15" data-unit="sleeve">
+                                    + Add 1 Sleeve
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Two-Column Asymmetrical Grid: Live Order Slip + Producer Dossier -->
+        <!-- BANNED: 3 feature cards in a row, fake testimonials, colored left stripes -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8" id="ledger">
+
+            <!-- Active Order Slip Terminal (5 Columns) -->
+            <div class="lg:col-span-5 border border-[#DCD6C8] bg-[#FAF8F4] p-6">
+                <div class="font-mono text-xs font-bold text-[#14281D] uppercase tracking-wider border-b border-[#DCD6C8] pb-2 mb-4 flex justify-between items-center">
+                    <span>Order Slip // Session Allocation</span>
+                    <span class="text-[#8B8F89] font-normal">STALL PICKUP</span>
+                </div>
+
+                <div id="order-items-container" class="divide-y divide-[#DCD6C8] min-h-[140px] mb-4">
+                    <p class="text-xs text-[#8B8F89] italic py-8 text-center" id="empty-cart-msg">
+                        No harvest items allocated yet. Click any "+ Add" button above to populate the dispatch slip.
+                    </p>
+                </div>
+
+                <div class="border-t-2 border-[#14281D] pt-3 font-mono text-xs space-y-1.5">
+                    <div class="flex justify-between text-[#5A5E59]">
+                        <span>Gross Harvest Total:</span>
+                        <span id="gross-total" class="tabular-nums font-semibold">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-[#5A5E59]">
+                        <span>Intermediary Platform Markup:</span>
+                        <span class="tabular-nums font-semibold">$0.00 (Zero Fee)</span>
+                    </div>
+                    <div class="flex justify-between text-[#14281D] font-bold text-sm pt-2 border-t border-[#DCD6C8]">
+                        <span>Estimated Cash Settlement:</span>
+                        <span id="net-total" class="tabular-nums">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="mt-5 pt-3 border-t border-[#DCD6C8]">
+                    <button id="generate-token-btn" class="w-full btn-architectural py-2.5 text-xs font-mono uppercase tracking-wider font-bold" disabled>
+                        Confirm Slip and Issue Token
+                    </button>
+                    <div class="text-[10px] text-[#8B8F89] font-mono mt-2 text-center">
+                        Settlement completed in cash upon inspection at vendor stalls.
+                    </div>
+                </div>
+
+                <!-- Generated Cryptographic Pass Container -->
+                <div id="receipt-display" class="hidden mt-4 border border-[#14281D] bg-[#EAE5D9] p-4 font-mono text-xs">
+                    <div class="text-[#14281D] font-bold uppercase mb-1">Pass Issued // MarketLink-2026-X9</div>
+                    <div class="text-[#5A5E59] text-[11px] mb-2">Show this code at Downtown Civic Plaza stalls.</div>
+                    <div class="bg-[#FAF8F4] p-2 border border-[#DCD6C8] text-center font-bold tracking-widest text-[#14281D] text-sm">
+                        MKTLNK-9924-EGRN
+                    </div>
+                </div>
+            </div>
+
+            <!-- Authentic Registered Smallholder Dossier (7 Columns) -->
+            <!-- BANNED: Fake testimonials with avatar photos -->
+            <div class="lg:col-span-7 border border-[#DCD6C8] bg-[#FAF8F4] p-6" id="growers">
+                <div class="font-mono text-xs font-bold text-[#14281D] uppercase tracking-wider border-b border-[#DCD6C8] pb-2 mb-4">
+                    Certified Smallholder Registry // Northern California Sector
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Producer Entry 01 -->
+                    <div class="border border-[#DCD6C8] bg-[#F4F1EA] p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <span class="font-mono text-[10px] text-[#8B8F89]">ENTRY 01</span>
+                                <h3 class="font-editorial text-lg font-bold text-[#14281D]">Silas Thorne &bull; Sunburst Organic Farm</h3>
+                            </div>
+                            <span class="font-mono text-[10px] border border-[#14281D] px-2 py-0.5 text-[#14281D] uppercase">Stall A-02</span>
+                        </div>
+                        <p class="text-xs text-[#5A5E59] leading-relaxed mb-3">
+                            Acreage: 18 acres in Pescadero coastal alluvial plain. Primary crops: Dry-farmed early girl tomatoes, brassicas, and cold-pressed olive oils.
+                        </p>
+                        <div class="font-mono text-[11px] text-[#14281D] flex flex-wrap gap-4 border-t border-[#DCD6C8] pt-2">
+                            <span>Soil Certificate: CCOF-CA-0981</span>
+                            <span>Water Source: Artesian Gravity Well</span>
+                            <span>Inspection: August 2026</span>
+                        </div>
+                    </div>
+
+                    <!-- Producer Entry 02 -->
+                    <div class="border border-[#DCD6C8] bg-[#F4F1EA] p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <span class="font-mono text-[10px] text-[#8B8F89]">ENTRY 02</span>
+                                <h3 class="font-editorial text-lg font-bold text-[#14281D]">Eleanor Vance &bull; Valley Root Regenerative</h3>
+                            </div>
+                            <span class="font-mono text-[10px] border border-[#14281D] px-2 py-0.5 text-[#14281D] uppercase">Stall B-04</span>
+                        </div>
+                        <p class="text-xs text-[#5A5E59] leading-relaxed mb-3">
+                            Acreage: 26 acres in Sebastopol apple valley. Primary crops: Heirloom root vegetables, cold-stored alliums, and heritage brassicas grown without synthetic inputs.
+                        </p>
+                        <div class="font-mono text-[11px] text-[#14281D] flex flex-wrap gap-4 border-t border-[#DCD6C8] pt-2">
+                            <span>Soil Certificate: Demeter-BIO-441</span>
+                            <span>Tillage: Minimum Disturbance</span>
+                            <span>Inspection: July 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer: Monographic, Compliant, No Purple, No Neon -->
+    <!-- BANNED: No TOS link, No Privacy Policy link, Purple and black theme -->
+    <footer class="border-t border-[#DCD6C8] bg-[#EAE5D9] mt-auto py-8 text-xs text-[#5A5E59]" id="compliance">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-6">
+                
+                <div class="md:col-span-5">
+                    <span class="font-editorial text-lg font-bold text-[#14281D] block mb-2">MarketLink Platform</span>
+                    <p class="text-xs leading-relaxed text-[#5A5E59] max-w-sm mb-3">
+                        Regional agricultural infrastructure built under the TechWiz 7 eGreen Basket framework. All transactions direct between grower and collector.
+                    </p>
+                    <div class="font-mono text-[11px] text-[#14281D]">
+                        San Francisco Regional Administrative Code Title 18.
+                    </div>
+                </div>
+
+                <div class="md:col-span-3 font-mono">
+                    <span class="text-[#14281D] font-bold uppercase tracking-wider block mb-2 text-[11px]">System Protocols</span>
+                    <ul class="space-y-1.5 list-none p-0 m-0 text-[11px]">
+                        <li>01. Cash on Inspection Settlement</li>
+                        <li>02. Zero Intermediary Markups</li>
+                        <li>03. Published Harvest Timestamps</li>
+                        <li>04. Standard Packaging Mandates</li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-4 font-mono">
+                    <span class="text-[#14281D] font-bold uppercase tracking-wider block mb-2 text-[11px]">Legal Documentation</span>
+                    <ul class="space-y-2 list-none p-0 m-0">
+                        <li>
+                            <!-- Mandatory TOS Link -->
+                            <a href="#tos" id="tos-link" class="text-[#14281D] font-semibold underline underline-offset-2 hover:text-[#1D3B2B]">
+                                Terms of Service (Section 12 Agricultural Disclosures)
+                            </a>
+                        </li>
+                        <li>
+                            <!-- Mandatory Privacy Policy Link -->
+                            <a href="#privacy" id="privacy-link" class="text-[#14281D] font-semibold underline underline-offset-2 hover:text-[#1D3B2B]">
+                                Privacy Policy &amp; Consumer Data Ledger Rights
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="text-[10px] text-[#8B8F89] mt-3">
+                        Audited for TechWiz 7 International Championship.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-[#DCD6C8] pt-4 flex flex-wrap justify-between items-center font-mono text-[10px] text-[#8B8F89]">
+                <div>&copy; 2026 MarketLink Consortium. All rights reserved.</div>
+                <div>Archival Palette &bull; Canvas #F4F1EA &bull; Ink #171A18</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mandatory Legal Modal Container (TOS & Privacy Policy) -->
+    <div id="legal-modal" class="hidden fixed inset-0 z-50 bg-[#171A18]/60 flex items-center justify-center p-4">
+        <div class="bg-[#FAF8F4] border-2 border-[#14281D] max-w-xl w-full p-6 max-h-[85vh] overflow-y-auto">
+            <div class="flex justify-between items-start border-b border-[#DCD6C8] pb-3 mb-4">
+                <div>
+                    <span class="font-mono text-[10px] text-[#8B8F89] uppercase" id="modal-subtitle">Legal Protocol</span>
+                    <h3 class="font-editorial text-xl font-bold text-[#14281D]" id="modal-title">Terms of Service</h3>
+                </div>
+                <button id="close-modal-btn" class="font-mono text-sm px-2 py-1 bg-[#EAE5D9] text-[#14281D] border border-[#DCD6C8]">
+                    [CLOSE]
+                </button>
+            </div>
+            <div class="text-xs text-[#5A5E59] space-y-3 leading-relaxed" id="modal-body">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Client-Side Real Interactive Engine (Strictly Non-Cliché) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Cart state
+            const cart = {};
+
+            // 1. Interactive Produce Item Addition
+            document.querySelectorAll('.btn-add-item').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.dataset.id;
+                    const name = this.dataset.name;
+                    const price = parseFloat(this.dataset.price);
+                    const unit = this.dataset.unit;
+
+                    if (!cart[id]) {
+                        cart[id] = { id, name, price, unit, qty: 1 };
+                    } else {
+                        cart[id].qty += 1;
+                    }
+
+                    renderCart();
+                });
+            });
+
+            // 2. Render Order Slip
+            function renderCart() {
+                const container = document.getElementById('order-items-container');
+                const emptyMsg = document.getElementById('empty-cart-msg');
+                const grossEl = document.getElementById('gross-total');
+                const netEl = document.getElementById('net-total');
+                const navStatus = document.getElementById('nav-cart-status');
+                const tokenBtn = document.getElementById('generate-token-btn');
+
+                const itemKeys = Object.keys(cart);
+
+                if (itemKeys.length === 0) {
+                    if (emptyMsg) emptyMsg.classList.remove('hidden');
+                    grossEl.textContent = '$0.00';
+                    netEl.textContent = '$0.00';
+                    navStatus.textContent = '0 items / $0.00';
+                    tokenBtn.disabled = true;
+                    return;
+                }
+
+                if (emptyMsg) emptyMsg.classList.add('hidden');
+                container.innerHTML = '';
+
+                let total = 0;
+                let totalQty = 0;
+
+                itemKeys.forEach(key => {
+                    const item = cart[key];
+                    const subtotal = item.price * item.qty;
+                    total += subtotal;
+                    totalQty += item.qty;
+
+                    const row = document.createElement('div');
+                    row.className = 'py-2 flex justify-between items-center text-xs font-mono';
+                    row.innerHTML = `
+                        <div>
+                            <span class="font-bold text-[#14281D] block">${item.name}</span>
+                            <span class="text-[11px] text-[#5A5E59]">${item.qty} ${item.unit}(s) &times; $${item.price.toFixed(2)}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-[#14281D] tabular-nums">$${subtotal.toFixed(2)}</span>
+                            <button class="px-1.5 py-0.5 text-[10px] bg-[#EAE5D9] text-[#14281D] border border-[#DCD6C8]" onclick="removeCartItem('${item.id}')">&times;</button>
+                        </div>
+                    `;
+                    container.appendChild(row);
+                });
+
+                grossEl.textContent = '$' + total.toFixed(2);
+                netEl.textContent = '$' + total.toFixed(2);
+                navStatus.textContent = `${totalQty} item(s) / $${total.toFixed(2)}`;
+                tokenBtn.disabled = false;
+            }
+
+            window.removeCartItem = function (id) {
+                if (cart[id]) {
+                    if (cart[id].qty > 1) {
+                        cart[id].qty -= 1;
+                    } else {
+                        delete cart[id];
+                    }
+                    renderCart();
+                }
+            };
+
+            // 3. Confirm Slip and Issue Token
+            const tokenBtn = document.getElementById('generate-token-btn');
+            const receiptDisplay = document.getElementById('receipt-display');
+            if (tokenBtn && receiptDisplay) {
+                tokenBtn.addEventListener('click', function () {
+                    receiptDisplay.classList.remove('hidden');
+                    this.textContent = 'Reservation Confirmed';
+                    this.disabled = true;
+                });
+            }
+
+            // 4. Simulate Skeleton Fetch
+            const simBtn = document.getElementById('toggle-skeleton-btn');
+            const skeletonBox = document.getElementById('skeleton-loader-state');
+            const liveTable = document.getElementById('live-ledger-table');
+
+            if (simBtn && skeletonBox && liveTable) {
+                simBtn.addEventListener('click', function () {
+                    skeletonBox.classList.remove('hidden');
+                    liveTable.classList.add('hidden');
+                    this.textContent = 'Refreshing Ledger...';
+                    this.disabled = true;
+
+                    setTimeout(() => {
+                        skeletonBox.classList.add('hidden');
+                        liveTable.classList.remove('hidden');
+                        this.textContent = 'Simulate Ledger Fetch';
+                        this.disabled = false;
+                    }, 1400);
+                });
+            }
+
+            // 5. Category Filtering
+            const filterTabs = document.querySelectorAll('.filter-tab');
+            const produceRows = document.querySelectorAll('.produce-item');
+
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    const filter = this.dataset.filter;
+
+                    filterTabs.forEach(t => {
+                        t.className = 'filter-tab px-3 py-1 bg-transparent text-[#5A5E59] border border-[#DCD6C8] hover:bg-[#E3DDD0]';
+                    });
+                    this.className = 'filter-tab px-3 py-1 bg-[#14281D] text-[#F4F1EA] border border-[#14281D]';
+
+                    produceRows.forEach(row => {
+                        if (filter === 'all' || row.dataset.category === filter) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // 6. Mandatory Legal Modal Handling (TOS & Privacy Policy)
+            const legalModal = document.getElementById('legal-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const tosLink = document.getElementById('tos-link');
+            const privacyLink = document.getElementById('privacy-link');
+
+            function openModal(title, text) {
+                modalTitle.textContent = title;
+                modalBody.innerHTML = text;
+                legalModal.classList.remove('hidden');
+            }
+
+            if (tosLink) {
+                tosLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    openModal('Terms of Service and Agricultural Disclosures', `
+                        <p><strong>Section 1: Direct Producer Contracts</strong></p>
+                        <p>All harvest reservations made through the MarketLink registry represent direct contracts between the registered consumer and regional smallholder. The digital platform retains zero custodial rights over produce and collects zero percent transaction rake.</p>
+                        <p><strong>Section 2: Cash Settlement and Physical Inspection</strong></p>
+                        <p>Consumers retain full legal rights to physically inspect crops prior to cash handover at designated venue stalls. Unfulfilled reservations expire without financial penalty after the stated collection cutoff.</p>
+                    `);
+                });
+            }
+
+            if (privacyLink) {
+                privacyLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    openModal('Privacy Policy and Consumer Ledger Rights', `
+                        <p><strong>Section 1: Data Minimization</strong></p>
+                        <p>MarketLink collects exclusively operational parameters necessary to confirm stall allocations (session identifier and cryptographic pickup token). No biometric or advertising telemetries are gathered or stored.</p>
+                        <p><strong>Section 2: Offline Integrity</strong></p>
+                        <p>Consumer session tokens exist ephemerally in browser memory and purge automatically upon market closure.</p>
+                    `);
+                });
+            }
+
+            if (closeModalBtn && legalModal) {
+                closeModalBtn.addEventListener('click', () => legalModal.classList.add('hidden'));
+                legalModal.addEventListener('click', (e) => {
+                    if (e.target === legalModal) legalModal.classList.add('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -148,6 +148,7 @@ function showEmeraldToast(message, type = 'success') {
         setTimeout(() => toast.remove(), 350);
     }, 3800);
 }
+window.showEmeraldToast = showEmeraldToast;
 
 // AI Bot Integration
 function initFaqBot() {
@@ -185,8 +186,10 @@ function initFaqBot() {
 
         // Skeleton loading indicator
         const loadingMsg = document.createElement('div');
-        loadingMsg.className = 'bot-msg bot';
-        loadingMsg.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-emerald-600"></i> Searching harvest registry...';
+        loadingMsg.className = 'bot-msg bot bot-loading-skeleton';
+        loadingMsg.setAttribute('role', 'status');
+        loadingMsg.setAttribute('aria-label', 'Searching market information');
+        loadingMsg.innerHTML = '<span></span><span></span><span></span>';
         messages.appendChild(loadingMsg);
         messages.scrollTop = messages.scrollHeight;
 

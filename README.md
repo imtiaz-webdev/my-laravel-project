@@ -7,6 +7,64 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Local Setup with XAMPP
+
+1. Start **MySQL** in the XAMPP Control Panel. In phpMyAdmin, create a database named `techwiz_db` using `utf8mb4`.
+2. Copy `.env.example` to `.env`, then set the database and administrator values:
+
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=techwiz_db
+DB_USERNAME=root
+DB_PASSWORD=
+ADMIN_EMAIL=admin@marketlink.org
+ADMIN_PASSWORD=choose-a-unique-long-password
+```
+
+Use the MySQL username/password configured in XAMPP if they differ from these local defaults. Do not commit `.env` or reuse the example password.
+
+If PowerShell reports that `php` is not recognized, add XAMPP's `php` folder (commonly `C:\xampp\php`) to `PATH`, or call the executable by its full path, for example `C:\xampp\php\php.exe artisan migrate --seed`.
+
+3. Install dependencies, create the application key, and create/seed the tables:
+
+```powershell
+composer install
+php artisan key:generate
+php artisan config:clear
+php artisan migrate --seed
+php artisan migrate:status
+npm install
+npm run build
+```
+
+The seeder refuses to create an administrator unless both `ADMIN_EMAIL` and `ADMIN_PASSWORD` are set. Public registrations can only create customer or vendor accounts.
+
+If `migrate:status` reports a connection error, confirm MySQL is running in XAMPP, the database exists, and `DB_HOST`, `DB_PORT`, `DB_USERNAME`, and `DB_PASSWORD` match XAMPP's MySQL settings. Clear Laravel's cached settings with `php artisan config:clear` after editing `.env`.
+
+`routes/web.php` loads the separate route files. Public pages, login, customer, and vendor routes are in `routes/frontend.php`; all admin management endpoints are in `routes/admin.php`, behind both login and the admin role check:
+
+```php
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+	Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
+```
+
+4. Start the local app and open `http://127.0.0.1:8000/login`:
+
+```powershell
+php artisan serve
+```
+
+Sign in with the configured administrator email/password. A wrong password must stay on the login page; a guest visiting `/admin/dashboard` is redirected to `/login`, and an authenticated non-admin receives HTTP 403. Admin routes use both `auth` and `role:admin` middleware.
+
+Run the focused access-control tests with:
+
+```powershell
+php artisan test --filter="admin_routes_require_authentication|wrong_password_cannot_authenticate_an_admin|non_admin_users_are_forbidden_from_admin_routes"
+```
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

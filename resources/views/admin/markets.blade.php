@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Market Location Manager | MarketLink Admin')
+@section('page-heading', 'Market venues')
 
 @section('content')
 <div class="container py-4">
